@@ -1,0 +1,313 @@
+# The configurations that used for the recording, feel free to edit them
+config:
+
+  # Specify a command to be executed
+  # like `/bin/bash -l`, `ls`, or any other commands
+  # the default is bash for Linux
+  # or powershell.exe for Windows
+  command: bash -l
+  
+  # Specify the current working directory path
+  # the default is the current working directory path
+  cwd: /Users/timotejavsec/Documents/Projects/marketron/api
+  
+  # Export additional ENV variables
+  env:
+    recording: true
+  
+  # Explicitly set the number of columns
+  # or use `auto` to take the current
+  # number of columns of your shell
+  cols: 166
+  
+  # Explicitly set the number of rows
+  # or use `auto` to take the current
+  # number of rows of your shell
+  rows: 40
+  
+  # Amount of times to repeat GIF
+  # If value is -1, play once
+  # If value is 0, loop indefinitely
+  # If value is a positive number, loop n times
+  repeat: 0
+  
+  # Quality
+  # 1 - 100
+  quality: 100
+  
+  # Delay between frames in ms
+  # If the value is `auto` use the actual recording delays
+  frameDelay: auto
+  
+  # Maximum delay between frames in ms
+  # Ignored if the `frameDelay` isn't set to `auto`
+  # Set to `auto` to prevent limiting the max idle time
+  maxIdleTime: 2000
+  
+  # The surrounding frame box
+  # The `type` can be null, window, floating, or solid`
+  # To hide the title use the value null
+  # Don't forget to add a backgroundColor style with a null as type
+  frameBox:
+    type: floating
+    title: Terminalizer
+    style:
+      border: 0px black solid
+      # boxShadow: none
+      # margin: 0px
+  
+  # Add a watermark image to the rendered gif
+  # You need to specify an absolute path for
+  # the image on your machine or a URL, and you can also
+  # add your own CSS styles
+  watermark:
+    imagePath: null
+    style:
+      position: absolute
+      right: 15px
+      bottom: 15px
+      width: 100px
+      opacity: 0.9
+  
+  # Cursor style can be one of
+  # `block`, `underline`, or `bar`
+  cursorStyle: block
+  
+  # Font family
+  # You can use any font that is installed on your machine
+  # in CSS-like syntax
+  fontFamily: "Monaco, Lucida Console, Ubuntu Mono, Monospace"
+  
+  # The size of the font
+  fontSize: 12
+  
+  # The height of lines
+  lineHeight: 1
+  
+  # The spacing between letters
+  letterSpacing: 0
+  
+  # Theme
+  theme:
+    background: "transparent"
+    foreground: "#afafaf"
+    cursor: "#c7c7c7"
+    black: "#232628"
+    red: "#fc4384"
+    green: "#b3e33b"
+    yellow: "#ffa727"
+    blue: "#75dff2"
+    magenta: "#ae89fe"
+    cyan: "#708387"
+    white: "#d5d5d0"
+    brightBlack: "#626566"
+    brightRed: "#ff7fac"
+    brightGreen: "#c8ed71"
+    brightYellow: "#ebdf86"
+    brightBlue: "#75dff2"
+    brightMagenta: "#ae89fe"
+    brightCyan: "#b1c6ca"
+    brightWhite: "#f9f9f4"
+  
+# Records, feel free to edit them
+records:
+  - delay: 1255
+    content: "\r\nThe default interactive shell is now zsh.\r\nTo update your account to use zsh, please run `chsh -s /bin/zsh`.\r\nFor more details, please visit https://support.apple.com/kb/HT208050.\r\n\e[?1034h(base) Timotejs-MacBook-Pro:api timotejavsec$ "
+  - delay: 1451
+    content: d
+  - delay: 120
+    content: o
+  - delay: 114
+    content: c
+  - delay: 123
+    content: k
+  - delay: 110
+    content: e
+  - delay: 116
+    content: r
+  - delay: 120
+    content: ' '
+  - delay: 549
+    content: e
+  - delay: 147
+    content: x
+  - delay: 122
+    content: e
+  - delay: 146
+    content: c
+  - delay: 119
+    content: ' '
+  - delay: 371
+    content: c5a675100bf0
+  - delay: 471
+    content: ' '
+  - delay: 1256
+    content: "\b\e[K"
+  - delay: 500
+    content: "\b\e[K"
+  - delay: 84
+    content: "\b\e[K"
+  - delay: 84
+    content: "\b\e[K"
+  - delay: 82
+    content: "\b\e[K"
+  - delay: 84
+    content: "\b\e[K"
+  - delay: 85
+    content: "\b\e[K"
+  - delay: 82
+    content: "\b\e[K"
+  - delay: 84
+    content: "\b\e[K"
+  - delay: 84
+    content: "\b\e[K"
+  - delay: 85
+    content: "\b\e[K"
+  - delay: 186
+    content: "\b\e[K"
+  - delay: 165
+    content: "\b\e[K"
+  - delay: 711
+    content: '-'
+  - delay: 301
+    content: i
+  - delay: 99
+    content: t
+  - delay: 100
+    content: ' '
+  - delay: 17056
+    content: c5a675100bf0
+  - delay: 563
+    content: ' '
+  - delay: 614
+    content: b
+  - delay: 51
+    content: a
+  - delay: 150
+    content: s
+  - delay: 107
+    content: h
+  - delay: 325
+    content: "\r\n"
+  - delay: 347
+    content: "\e[?2004h\e]0;root@c5a675100bf0: /var/www/html\aroot@c5a675100bf0:/var/www/html# "
+  - delay: 11254
+    content: p
+  - delay: 82
+    content: h
+  - delay: 69
+    content: p
+  - delay: 101
+    content: ' '
+  - delay: 99
+    content: a
+  - delay: 136
+    content: r
+  - delay: 185
+    content: t
+  - delay: 140
+    content: i
+  - delay: 74
+    content: s
+  - delay: 65
+    content: a
+  - delay: 99
+    content: 'n'
+  - delay: 91
+    content: ' '
+  - delay: 129
+    content: m
+  - delay: 84
+    content: a
+  - delay: 133
+    content: k
+  - delay: 101
+    content: e
+  - delay: 382
+    content: ':'
+  - delay: 95
+    content: r
+  - delay: 86
+    content: e
+  - delay: 192
+    content: q
+  - delay: 495
+    content: u
+  - delay: 115
+    content: e
+  - delay: 170
+    content: s
+  - delay: 147
+    content: t
+  - delay: 64
+    content: ' '
+  - delay: 875
+    content: P
+  - delay: 239
+    content: r
+  - delay: 106
+    content: o
+  - delay: 114
+    content: d
+  - delay: 167
+    content: u
+  - delay: 485
+    content: c
+  - delay: 184
+    content: t
+  - delay: 317
+    content: +
+  - delay: 933
+    content: "\b \b"
+  - delay: 452
+    content: /
+  - delay: 428
+    content: S
+  - delay: 268
+    content: t
+  - delay: 183
+    content: o
+  - delay: 107
+    content: r
+  - delay: 82
+    content: e
+  - delay: 311
+    content: P
+  - delay: 188
+    content: r
+  - delay: 115
+    content: o
+  - delay: 79
+    content: d
+  - delay: 171
+    content: u
+  - delay: 84
+    content: c
+  - delay: 312
+    content: t
+  - delay: 340
+    content: R
+  - delay: 187
+    content: e
+  - delay: 216
+    content: q
+  - delay: 128
+    content: u
+  - delay: 98
+    content: e
+  - delay: 201
+    content: s
+  - delay: 116
+    content: t
+  - delay: 221
+    content: "\r\n\e[?2004l\r"
+  - delay: 1121
+    content: "\r\n  \e[37;44m INFO \e[39;49m Request \e[1m[app/Http/Requests/Product/StoreProductRequest.php]\e[22m created successfully.  \r\n\r\n"
+  - delay: 30
+    content: "\e[?2004h\e]0;root@c5a675100bf0: /var/www/html\aroot@c5a675100bf0:/var/www/html# \e[K"
+  - delay: 3079
+    content: "\e[?2004l\r\r\nexit\r\n"
+  - delay: 54
+    content: '(base) Timotejs-MacBook-Pro:api timotejavsec$ '
+  - delay: 3939
+    content: "logout\r\n"
