@@ -10,7 +10,7 @@ class ImageEngineService
 
     private PendingRequest $client;
     public function __construct(){
-        $this->client = Http::baseUrl(config("image-engine.url"));
+        $this->client = Http::baseUrl(config("image-engine.url"))->timeout(30);
     }
 
     public function generateImage(GenerateImageRequest $request){
@@ -34,7 +34,9 @@ class ImageEngineService
                     "x" => $request->getTemplate()->getRightTop()->x,
                     "y" => $request->getTemplate()->getRightTop()->x
                 ]
-            ]
+            ],
+            "viewportWidth" => $request->getTemplate()->getViewportWidth(),
+            "viewportHeight" => $request->getTemplate()->getViewportHeight()
         ]);
         return $this->client->get("/image", $query)->json();
     }

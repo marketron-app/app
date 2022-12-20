@@ -4,8 +4,24 @@ namespace App\Services\ImageEngine;
 
 class Template
 {
-    public function __construct(private Coordinate $leftTop, private Coordinate $leftBottom, private Coordinate $rightBottom, private Coordinate $rightTop){
+    public function __construct(private Coordinate $leftTop, private Coordinate $leftBottom, private Coordinate $rightBottom, private Coordinate $rightTop, private int $viewportWidth, private int $viewportHeight){
 
+    }
+
+    /**
+     * @return int
+     */
+    public function getViewportWidth(): int
+    {
+        return $this->viewportWidth;
+    }
+
+    /**
+     * @return int
+     */
+    public function getViewportHeight(): int
+    {
+        return $this->viewportHeight;
     }
 
     /**
