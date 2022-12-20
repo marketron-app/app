@@ -33,7 +33,7 @@ class PaginatedRequest extends FormRequest
     {
         $this->merge([
             "page" => $this->page ?? 1,
-            "perPage" => $this->perPage ?? 20
+            "perPage" => $this->perPage ?? 15
         ]);
     }
 }
