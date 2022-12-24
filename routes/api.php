@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\GithubAuthController;
+use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\TemplateController;
 use Illuminate\Http\Request;
@@ -26,4 +28,15 @@ Route::prefix("templates")->group(function (){
 
 Route::prefix("images")->group(function (){
    Route::post("", [ImageController::class, "store"]);
+});
+
+Route::prefix("auth")->group(function(){
+    Route::prefix("github")->group(function (){
+        Route::get('redirect', [GithubAuthController::class, "redirect"]);
+        Route::get('callback', [GithubAuthController::class, "callback"])->name("github-callback");
+    });
+    Route::prefix("google")->group(function (){
+        Route::get('redirect', [GoogleAuthController::class, "redirect"]);
+        Route::get('callback', [GoogleAuthController::class, "callback"])->name("google-callback");
+    });
 });
