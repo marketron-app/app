@@ -11,17 +11,17 @@ class Template extends Model
     use HasFactory;
     protected $guarded = [];
     protected $casts = [
-        "coordinates" => "json"
+        'coordinates' => 'json',
     ];
 
     public static function convertToTemplate(Template $template): \App\Services\ImageEngine\Template
     {
         $coordinates = $template->coordinates;
         return new \App\Services\ImageEngine\Template(
-            new Coordinate($coordinates["left-top"]["x"], $coordinates["left-top"]["y"]),
-            new Coordinate($coordinates["left-bottom"]["x"], $coordinates["left-bottom"]["y"]),
-            new Coordinate($coordinates["right-bottom"]["x"], $coordinates["right-bottom"]["y"]),
-            new Coordinate($coordinates["right-top"]["x"], $coordinates["right-top"]["y"]),
+            new Coordinate($coordinates['left-top']['x'], $coordinates['left-top']['y']),
+            new Coordinate($coordinates['left-bottom']['x'], $coordinates['left-bottom']['y']),
+            new Coordinate($coordinates['right-bottom']['x'], $coordinates['right-bottom']['y']),
+            new Coordinate($coordinates['right-top']['x'], $coordinates['right-top']['y']),
             $template->screenshot_width,
             $template->screenshot_height
         );

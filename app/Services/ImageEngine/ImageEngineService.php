@@ -7,37 +7,21 @@ use Illuminate\Support\Facades\Http;
 
 class ImageEngineService
 {
-
     private PendingRequest $client;
-    public function __construct(){
-        $this->client = Http::baseUrl(config("image-engine.url"))->timeout(30);
+    public function __construct()
+    {
+        $this->client = Http::baseUrl(config('image-engine.url'))->timeout(30);
     }
 
-    public function generateImage(GenerateImageRequest $request){
+    public function generateImage(GenerateImageRequest $request)
+    {
         $query = http_build_query([
-            "url" => $request->getUrl(),
-            "templateImage" => $request->getTemplateImageUrl(),
-            "coordinates" => [
-                [
-                    "x" => $request->getTemplate()->getLeftTop()->x,
-                    "y" => $request->getTemplate()->getLeftTop()->x
-                ],
-                [
-                    "x" => $request->getTemplate()->getLeftBottom()->x,
-                    "y" => $request->getTemplate()->getLeftBottom()->x
-                ],
-                [
-                    "x" => $request->getTemplate()->getRightBottom()->x,
-                    "y" => $request->getTemplate()->getRightBottom()->x
-                ],
-                [
-                    "x" => $request->getTemplate()->getRightTop()->x,
-                    "y" => $request->getTemplate()->getRightTop()->x
-                ]
-            ],
-            "viewportWidth" => $request->getTemplate()->getViewportWidth(),
-            "viewportHeight" => $request->getTemplate()->getViewportHeight()
+            'url' => $request->getUrl(),
+            'templateImage' => $request->getTemplateImageUrl(),
+            'coordinates' => $request->getFormatedCoordinates(),
+            'viewportWidth' => $request->getTemplate()->getViewportWidth(),
+            'viewportHeight' => $request->getTemplate()->getViewportHeight(),
         ]);
-        return $this->client->get("/image", $query)->json();
+        return $this->client->get('/image', $query)->json();
     }
 }

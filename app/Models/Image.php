@@ -11,10 +11,11 @@ class Image extends Model
     protected $guarded = [];
 
     protected $casts = [
-        "metadata" => "array"
+        'metadata' => 'array',
     ];
 
-    public function template(){
+    public function template()
+    {
         return $this->belongsTo(Template::class);
     }
 }

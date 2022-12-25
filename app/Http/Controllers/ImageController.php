@@ -8,14 +8,14 @@ use App\Services\Image\ImageService;
 
 class ImageController extends Controller
 {
-    public function __construct(private ImageService $imageService){
-
+    public function __construct(private ImageService $imageService)
+    {
     }
     public function store(StoreImageRequest $request): ImageResource
     {
         $image = $this->imageService->createImage(
-            $request->validated("template"),
-            $request->validated("url"),
+            (string) $request->validated('template'),
+            (string) $request->validated('url'),
         );
 
         return ImageResource::make($image);

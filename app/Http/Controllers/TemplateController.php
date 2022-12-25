@@ -9,8 +9,8 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class TemplateController extends Controller
 {
-    public function __construct(private TemplateService $templateService){
-
+    public function __construct(private TemplateService $templateService)
+    {
     }
     /**
      * Display a listing of the resource.
@@ -19,7 +19,6 @@ class TemplateController extends Controller
      */
     public function index(IndexTemplatesRequest $request): AnonymousResourceCollection
     {
-        $data = $request->validated();
-        return TemplateResource::collection($this->templateService->index($data["page"], $data["perPage"]));
+        return TemplateResource::collection($this->templateService->index($request->validated('page'), $request->validated('perPage')));
     }
 }

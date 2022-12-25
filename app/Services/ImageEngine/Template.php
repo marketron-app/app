@@ -4,8 +4,8 @@ namespace App\Services\ImageEngine;
 
 class Template
 {
-    public function __construct(private Coordinate $leftTop, private Coordinate $leftBottom, private Coordinate $rightBottom, private Coordinate $rightTop, private int $viewportWidth, private int $viewportHeight){
-
+    public function __construct(private Coordinate $leftTop, private Coordinate $leftBottom, private Coordinate $rightBottom, private Coordinate $rightTop, private int $viewportWidth, private int $viewportHeight)
+    {
     }
 
     /**

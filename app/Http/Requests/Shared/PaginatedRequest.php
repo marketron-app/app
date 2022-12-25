@@ -24,16 +24,16 @@ class PaginatedRequest extends FormRequest
     public function rules()
     {
         return [
-            "page" => "nullable",
-            "perPage" => "nullable"
+            'page' => 'nullable',
+            'perPage' => 'nullable',
         ];
     }
 
     protected function prepareForValidation()
     {
         $this->merge([
-            "page" => $this->page ?? 1,
-            "perPage" => $this->perPage ?? 15
+            'page' => $this->page ?? 1,
+            'perPage' => $this->perPage ?? 15,
         ]);
     }
 }

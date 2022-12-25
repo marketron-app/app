@@ -22,21 +22,21 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::prefix("templates")->group(function (){
-   Route::get("", [TemplateController::class, "index"]);
+Route::prefix('templates')->group(function () {
+    Route::get('', [TemplateController::class, 'index']);
 });
 
-Route::prefix("images")->group(function (){
-   Route::post("", [ImageController::class, "store"]);
+Route::prefix('images')->group(function () {
+    Route::post('', [ImageController::class, 'store']);
 });
 
-Route::prefix("auth")->group(function(){
-    Route::prefix("github")->group(function (){
-        Route::get('redirect', [GithubAuthController::class, "redirect"]);
-        Route::get('callback', [GithubAuthController::class, "callback"])->name("github-callback");
+Route::prefix('auth')->group(function () {
+    Route::prefix('github')->group(function () {
+        Route::get('redirect', [GithubAuthController::class, 'redirect']);
+        Route::get('callback', [GithubAuthController::class, 'callback'])->name('github-callback');
     });
-    Route::prefix("google")->group(function (){
-        Route::get('redirect', [GoogleAuthController::class, "redirect"]);
-        Route::get('callback', [GoogleAuthController::class, "callback"])->name("google-callback");
+    Route::prefix('google')->group(function () {
+        Route::get('redirect', [GoogleAuthController::class, 'redirect']);
+        Route::get('callback', [GoogleAuthController::class, 'callback'])->name('google-callback');
     });
 });

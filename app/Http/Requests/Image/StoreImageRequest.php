@@ -25,8 +25,8 @@ class StoreImageRequest extends FormRequest
     public function rules()
     {
         return [
-            "url" => ["required", "url"],
-            "template" => ["required", Rule::exists("templates", "identifier")]
+            'url' => ['required', 'url'],
+            'template' => ['required', Rule::exists('templates', 'identifier')],
         ];
     }
 }
