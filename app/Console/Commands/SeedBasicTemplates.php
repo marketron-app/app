@@ -30,11 +30,11 @@ class SeedBasicTemplates extends Command
     {
         $data = json_decode(file_get_contents(storage_path('app/seeders_data/templates.json')), true);
         foreach ($data as $template) {
-            $this->line('Inserting ' . $template['identifier'] . ' template');
+            $this->line('Inserting '.$template['identifier'].' template');
             Template::query()->updateOrCreate(
                 [
-                'identifier' => $template['identifier'],
-            ],
+                    'identifier' => $template['identifier'],
+                ],
                 $template
             );
             $this->info('Success ✅');

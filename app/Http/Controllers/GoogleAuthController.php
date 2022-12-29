@@ -28,6 +28,7 @@ class GoogleAuthController extends Controller
         ]);
 
         Auth::login($user);
-        return redirect(config('app.url') . '/login-redirect?token=' . $user->createToken('google')->plainTextToken);
+
+        return redirect(config('app.url').'/login-redirect?token='.$user->createToken('google')->plainTextToken);
     }
 }

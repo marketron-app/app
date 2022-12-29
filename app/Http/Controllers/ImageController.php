@@ -11,6 +11,7 @@ class ImageController extends Controller
     public function __construct(private ImageService $imageService)
     {
     }
+
     public function store(StoreImageRequest $request): ImageResource
     {
         $image = $this->imageService->createImage(

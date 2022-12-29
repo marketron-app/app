@@ -13,6 +13,7 @@ class ImageService
     public function __construct(private ImageEngineService $imageEngineService)
     {
     }
+
     public function createImage(string $templateIdentifier, string $url)
     {
         $template = Template::query()->where('identifier', $templateIdentifier)->firstOrFail();

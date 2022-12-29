@@ -9,7 +9,9 @@ use Illuminate\Database\Eloquent\Model;
 class Template extends Model
 {
     use HasFactory;
+
     protected $guarded = [];
+
     protected $casts = [
         'coordinates' => 'json',
     ];
@@ -17,6 +19,7 @@ class Template extends Model
     public static function convertToTemplate(Template $template): \App\Services\ImageEngine\Template
     {
         $coordinates = $template->coordinates;
+
         return new \App\Services\ImageEngine\Template(
             new Coordinate($coordinates['left-top']['x'], $coordinates['left-top']['y']),
             new Coordinate($coordinates['left-bottom']['x'], $coordinates['left-bottom']['y']),

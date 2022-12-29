@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Http;
 class ImageEngineService
 {
     private PendingRequest $client;
+
     public function __construct()
     {
         $this->client = Http::baseUrl(config('image-engine.url'))->timeout(30);
@@ -22,6 +23,7 @@ class ImageEngineService
             'viewportWidth' => $request->getTemplate()->getViewportWidth(),
             'viewportHeight' => $request->getTemplate()->getViewportHeight(),
         ]);
+
         return $this->client->get('/image', $query)->json();
     }
 }

@@ -19,9 +19,9 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(User::class)->nullable();
             $table->foreignIdFor(Template::class);
-            $table->mediumText("url");
-            $table->mediumText("s3_path");
-            $table->json("metadata");
+            $table->mediumText('url');
+            $table->mediumText('s3_path');
+            $table->json('metadata');
             $table->timestamps();
         });
     }

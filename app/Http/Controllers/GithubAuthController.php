@@ -28,6 +28,7 @@ class GithubAuthController extends Controller
         ]);
 
         Auth::login($user);
-        return redirect(config('app.url') . '/login-redirect?token=' . $user->createToken('github')->plainTextToken);
+
+        return redirect(config('app.url').'/login-redirect?token='.$user->createToken('github')->plainTextToken);
     }
 }

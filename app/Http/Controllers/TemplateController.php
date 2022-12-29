@@ -12,6 +12,7 @@ class TemplateController extends Controller
     public function __construct(private TemplateService $templateService)
     {
     }
+
     /**
      * Display a listing of the resource.
      *

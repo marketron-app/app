@@ -15,14 +15,14 @@ return new class extends Migration
     {
         Schema::create('templates', function (Blueprint $table) {
             $table->id();
-            $table->string("identifier")->unique()->index();
-            $table->string("title");
-            $table->mediumText("description");
-            $table->text("url");
-            $table->text("thumbnail_url");
-            $table->json("coordinates");
-            $table->integer("screenshot_width");
-            $table->integer("screenshot_height");
+            $table->string('identifier')->unique()->index();
+            $table->string('title');
+            $table->mediumText('description');
+            $table->text('url');
+            $table->text('thumbnail_url');
+            $table->json('coordinates');
+            $table->integer('screenshot_width');
+            $table->integer('screenshot_height');
             $table->timestamps();
         });
     }

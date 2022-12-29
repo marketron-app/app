@@ -12,6 +12,7 @@ use Tests\TestCase;
 class TemplateServiceTest extends TestCase
 {
     use RefreshDatabase;
+
     public function testIndexReturnsFirstPageIfPageIsInvalid()
     {
         // Given
