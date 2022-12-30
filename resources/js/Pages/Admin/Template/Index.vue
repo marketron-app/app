@@ -1,7 +1,8 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head } from '@inertiajs/inertia-vue3';
-import {ChevronLeftIcon, ChevronRightIcon} from "@heroicons/vue/24/solid";
+import { Head, Link } from '@inertiajs/inertia-vue3';
+import {ChevronLeftIcon, ChevronRightIcon, PlusIcon} from "@heroicons/vue/24/solid";
+
 </script>
 
 <template>
@@ -13,6 +14,16 @@ import {ChevronLeftIcon, ChevronRightIcon} from "@heroicons/vue/24/solid";
         </template>
 
         <div class="py-12">
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mb-3">
+                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-3">
+                    <Link :href="route('templates.create')" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                        <div class="inline-flex items-center">
+                        New template
+                        <PlusIcon class="ml-1 h-4 w-4" />
+                        </div>
+                    </Link>
+                </div>
+            </div>
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <table class="w-full text-sm text-left">
@@ -23,6 +34,9 @@ import {ChevronLeftIcon, ChevronRightIcon} from "@heroicons/vue/24/solid";
                             </th>
                             <th scope="col" class="py-3 px-6">
                                 Name
+                            </th>
+                            <th scope="col" class="py-3 px-6">
+                                Identifier
                             </th>
                             <th scope="col" class="py-3 px-6">
                                 Tags
@@ -40,8 +54,13 @@ import {ChevronLeftIcon, ChevronRightIcon} from "@heroicons/vue/24/solid";
                             <td class="py-4 px-6 font-medium whitespace-nowrap">
                                 Android 1
                             </td>
+                            <td class="py-4 px-6 font-medium whitespace-nowrap">
+                                android-1
+                            </td>
                             <td class="py-4 px-6">
-                                Laptop
+                                <span class="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800">phone</span>
+                                <span class="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800">android</span>
+                                <span class="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800">vertical</span>
                             </td>
                             <td class="py-4 px-6">
                                 <button type="button" class="py-2 px-3 mr-1 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Show</button>
