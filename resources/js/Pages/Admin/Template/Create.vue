@@ -6,6 +6,7 @@ import TextInput from "@/Components/TextInput.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import {PlusIcon} from "@heroicons/vue/24/solid"
 import InputError from "@/Components/InputError.vue";
+import ImageCoordinatePicker from "@/Components/ImageCoordinatePicker.vue";
 
 </script>
 
@@ -94,7 +95,6 @@ export default {
                                     class="mt-1 block w-11/12"
                                     v-model="currentKeyword"
                                     required
-                                    autofocus
                                     @keyup.enter.prevent="addKeyword"
                                 />
                                 <PrimaryButton class="ml-4 mt-1 w-1/12 justify-center" :class="{ 'opacity-25': this.form.processing }" type="button" @click.native="addKeyword()">
@@ -102,10 +102,12 @@ export default {
                                 </PrimaryButton>
                             </div>
                             <div class="inline-flex mt-1">
-                                <span v-for="(keyword, index) in keywords" class="cursor-pointer bg-blue-100 text-blue-800 text-m font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800" @click="removeKeyword(index)">{{ keyword }}</span>
+                                <span v-for="(keyword, index) in keywords" :key="index" class="cursor-pointer bg-blue-100 text-blue-800 text-m font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800" @click="removeKeyword(index)">{{ keyword }}</span>
 
                             </div>
                             <InputError class="mt-2" :message="this.form.errors.keywords" />
+
+                            <ImageCoordinatePicker class="w-full mt-5"/>
 
                         </div>
 
