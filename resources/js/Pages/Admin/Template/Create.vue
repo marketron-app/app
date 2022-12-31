@@ -107,7 +107,8 @@ export default {
                             </div>
                             <InputError class="mt-2" :message="this.form.errors.keywords" />
 
-                            <ImageCoordinatePicker class="w-full mt-5"/>
+                            <InputLabel for="image" value="Image" class="mt-5"/>
+                            <ImageCoordinatePicker class="w-full"/>
 
                         </div>
 
