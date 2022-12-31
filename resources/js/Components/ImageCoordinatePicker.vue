@@ -22,7 +22,10 @@
                 <div v-show="file">
                     <button @click="clearPoints" type="button" class="py-2 px-3 mb-1 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Clear points</button>
 
-                    <canvas id="image-canvas"></canvas>
+                    <div style="position: relative; height: fit-content">
+                        <canvas id="image-canvas" style="position: relative; left: 0; top: 0; z-index: 0;"></canvas>
+                        <canvas id="points-canvas" style="position: absolute; left: 0; top: 0; z-index: 1;"></canvas>
+                    </div>
                 </div>
             </div>
             <div class="w-1/4 p-2">
@@ -44,14 +47,18 @@ export default {
             height: 0,
             scale: 0,
             canvas: null,
-            canvasCtx: null
+            canvasCtx: null,
+            pointsCanvas: null,
+            pointsCanvasCtx: null
         }
     },
     mounted() {
         this.canvas = document.getElementById('image-canvas');
-        this.canvas.addEventListener("click", this.onCanvasClick)
+        this.pointsCanvas = document.getElementById('points-canvas');
+        this.pointsCanvas.addEventListener("click", this.onCanvasClick)
 
         this.canvasCtx = this.canvas.getContext("2d")
+        this.pointsCanvasCtx = this.pointsCanvas.getContext("2d")
     },
     watch: {
         points: {
@@ -80,25 +87,32 @@ export default {
                     this.height = this.scale * image.height
                     this.canvas.width = this.width;
                     this.canvas.height = this.height;
+                    this.pointsCanvas.width = this.width;
+                    this.pointsCanvas.height = this.height;
                     this.canvasCtx.drawImage(image,0,0, this.width, this.height);
                 }
             }
         },
         onCanvasClick(e){
-            let rect = this.canvas.getBoundingClientRect();
+            let rect = this.pointsCanvas.getBoundingClientRect();
             let x = e.clientX - rect.left;
             let y = e.clientY - rect.top;
             this.points.push({x, y})
         },
         redraw(){
-            this.canvasCtx.clearRect(0, 0, this.canvasCtx.canvas.width, this.canvasCtx.canvas.height)
-            this.drawImage()
+            this.pointsCanvasCtx.clearRect(0, 0, this.pointsCanvasCtx.canvas.width, this.pointsCanvasCtx.canvas.height)
 
         },
         drawPoints(){
-            for(let point of this.points){
-                this.canvasCtx.fillRect(point.x - 2.5, point.y - 2.5, 5, 5)
-            }
+            this.redraw()
+            this.pointsCanvasCtx.fillStyle = "rgba(255,0,0,0.57)"
+            this.pointsCanvasCtx.beginPath()
+            this.points.forEach((value, i) => {
+                this.pointsCanvasCtx.fillRect(value.x - 2.5, value.y - 2.5, 5, 5)
+                this.pointsCanvasCtx.lineTo(value.x, value.y)
+            })
+            this.pointsCanvasCtx.closePath()
+            this.pointsCanvasCtx.fill()
         },
         clearPoints(){
             this.points = []
