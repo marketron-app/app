@@ -24,7 +24,9 @@ export default {
                 description: '',
                 keywords: [],
                 pointsToClear: [],
-                screenshotPoints: []
+                screenshotPoints: [],
+                screenshotWidth: 0,
+                screenshotHeight: 0
             })
         }
     },
@@ -86,7 +88,6 @@ export default {
                                 class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
                                 v-model="this.form.description"
                                 required
-                                autofocus
                                 autocomplete="title"
                             />
                             <InputError class="mt-2" :message="this.form.errors.description" />
@@ -116,9 +117,37 @@ export default {
                             <InputLabel for="image" value="Image" class="mt-5"/>
                             <ImageCoordinatePicker class="w-full" @finished="this.savePoints"/>
 
+                            <div class="flex">
+                                <div class="w-1/2 pr-2">
+                                    <InputLabel for="screenshotWidth" value="Screenshot width" />
+                                    <TextInput
+                                        id="screenshotWidth"
+                                        type="text"
+                                        class="mt-1 block w-full"
+                                        v-model="this.form.screenshotWidth"
+                                        required
+                                    />
+                                    <InputError class="mt-2" :message="this.form.errors.screenshotWidth" />
+                                </div>
+
+                                <div class="w-1/2 pl-2">
+                                    <InputLabel for="screenshotHeight" value="Screenshot height" />
+                                    <TextInput
+                                        id="screenshotHeight"
+                                        type="text"
+                                        class="mt-1 block w-full"
+                                        v-model="this.form.screenshotHeight"
+                                    />
+                                    <InputError class="mt-2" :message="this.form.errors.screenshotHeight" />
+                                </div>
+                            </div>
+
                         </div>
 
-
+                        <button type="submit"
+                                class="mt-5 w-full mt-2 py-2 px-3 mb-1 text-m font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 block">
+                                Apply
+                        </button>
                     </form>
 
                 </div>
