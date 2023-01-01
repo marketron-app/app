@@ -23,6 +23,8 @@ export default {
                 identifier: '',
                 description: '',
                 keywords: [],
+                pointsToClear: [],
+                screenshotPoints: []
             })
         }
     },
@@ -37,8 +39,12 @@ export default {
         submit(){
             this.form.keywords = this.keywords
             this.form.post(route('templates.store'), {
-                onFinish: () => this.this.form.reset(),
+                onFinish: () => this.form.reset(),
             });
+        },
+        savePoints(pointsToClear, screenshotPoints){
+            this.form.pointsToClear = pointsToClear;
+            this.form.screenshotPoints = screenshotPoints
         }
     }
 }
@@ -108,7 +114,7 @@ export default {
                             <InputError class="mt-2" :message="this.form.errors.keywords" />
 
                             <InputLabel for="image" value="Image" class="mt-5"/>
-                            <ImageCoordinatePicker class="w-full"/>
+                            <ImageCoordinatePicker class="w-full" @finished="this.savePoints"/>
 
                         </div>
 

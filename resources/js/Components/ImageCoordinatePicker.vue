@@ -177,8 +177,10 @@ export default {
         savePoints() {
             if (this.pointsToClear.length === 0)
                 this.pointsToClear = this.points
-            else
+            else if (this.screenshotPoints.length === 0){
                 this.screenshotPoints = this.points
+                this.$emit("finished", this.pointsToClear, this.screenshotPoints)
+            }
             this.points = [];
 
             this.pointsCanvasCtx.fillStyle = "rgba(0,72,255,0.57)"
