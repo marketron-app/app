@@ -31,7 +31,7 @@
 <div align="center">
 
   <a href="https://github.com/marketron-app/app">
-    <img src="public/images/marketron-cropped.png" alt="Logo" width="80" height="80">
+    <img src="public/images/marketron-cropped.png" alt="Logo" height="50">
   </a>
 <h3 align="center">Marketron API</h3>
 
