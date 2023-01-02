@@ -3,11 +3,17 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Template\StoreTemplateRequest;
+use App\Services\Template\TemplateService;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class TemplateController extends Controller
 {
+    public function __construct(private TemplateService $templateService)
+    {
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +21,7 @@ class TemplateController extends Controller
      */
     public function index()
     {
-        return Inertia::render("Admin/Template/Index");
+        return Inertia::render('Admin/Template/Index');
     }
 
     /**
@@ -25,7 +31,7 @@ class TemplateController extends Controller
      */
     public function create()
     {
-        return Inertia::render("Admin/Template/Create");
+        return Inertia::render('Admin/Template/Create');
     }
 
     /**
@@ -34,9 +40,10 @@ class TemplateController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreTemplateRequest $request)
     {
-        //
+        $template = $this->templateService->storeTemplate($request);
+        return redirect("admin.templates.index");
     }
 
     /**

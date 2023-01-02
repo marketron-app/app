@@ -23,8 +23,9 @@ export default {
                 identifier: '',
                 description: '',
                 keywords: [],
-                pointsToClear: [],
-                screenshotPoints: [],
+                image: null,
+                cutoutCoordinates: [],
+                screenshotCoordinates: [],
                 screenshotWidth: 0,
                 screenshotHeight: 0
             })
@@ -44,9 +45,12 @@ export default {
                 onFinish: () => this.form.reset(),
             });
         },
-        savePoints(pointsToClear, screenshotPoints){
-            this.form.pointsToClear = pointsToClear;
-            this.form.screenshotPoints = screenshotPoints
+        savePoints(cutoutCoordinates, screenshotCoordinates){
+            this.form.cutoutCoordinates = cutoutCoordinates;
+            this.form.screenshotCoordinates = screenshotCoordinates
+        },
+        saveImage(image){
+            this.form.image = image
         }
     }
 }
@@ -101,8 +105,7 @@ export default {
                                     type="text"
                                     class="mt-1 block w-11/12"
                                     v-model="currentKeyword"
-                                    required
-                                    @keyup.enter.prevent="addKeyword"
+                                    @keydown.enter.prevent="addKeyword"
                                 />
                                 <PrimaryButton class="ml-4 mt-1 w-1/12 justify-center" :class="{ 'opacity-25': this.form.processing }" type="button" @click.native="addKeyword()">
                                     <PlusIcon class="w-5 h-5"/>
@@ -115,14 +118,14 @@ export default {
                             <InputError class="mt-2" :message="this.form.errors.keywords" />
 
                             <InputLabel for="image" value="Image" class="mt-5"/>
-                            <ImageCoordinatePicker class="w-full" @finished="this.savePoints"/>
+                            <ImageCoordinatePicker class="w-full" @finished="this.savePoints" @saveimage="this.saveImage"/>
 
                             <div class="flex">
                                 <div class="w-1/2 pr-2">
                                     <InputLabel for="screenshotWidth" value="Screenshot width" />
                                     <TextInput
                                         id="screenshotWidth"
-                                        type="text"
+                                        type="number"
                                         class="mt-1 block w-full"
                                         v-model="this.form.screenshotWidth"
                                         required
@@ -134,7 +137,7 @@ export default {
                                     <InputLabel for="screenshotHeight" value="Screenshot height" />
                                     <TextInput
                                         id="screenshotHeight"
-                                        type="text"
+                                        type="number"
                                         class="mt-1 block w-full"
                                         v-model="this.form.screenshotHeight"
                                     />
@@ -146,7 +149,7 @@ export default {
 
                         <button type="submit"
                                 class="mt-5 w-full mt-2 py-2 px-3 mb-1 text-m font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 block">
-                                Apply
+                                Save
                         </button>
                     </form>
 

@@ -128,6 +128,7 @@ export default {
         setFile(event) {
             this.file = event.target.files[0];
             this.drawImage()
+            this.$emit("saveimage", this.file)
         },
         drawImage() {
             let reader = new FileReader();
