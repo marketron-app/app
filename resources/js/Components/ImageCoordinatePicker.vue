@@ -125,6 +125,14 @@ export default {
         }
     },
     methods: {
+        formatPoints(points){
+            return points.map((el) => {
+                return {
+                    x: el.x * ((1 / this.scale)),
+                    y: el.y * ((1 / this.scale))
+                }
+            });
+        },
         setFile(event) {
             this.file = event.target.files[0];
             this.drawImage()
@@ -180,7 +188,7 @@ export default {
                 this.pointsToClear = this.points
             else if (this.screenshotPoints.length === 0){
                 this.screenshotPoints = this.points
-                this.$emit("finished", this.pointsToClear, this.screenshotPoints)
+                this.$emit("finished", this.formatPoints(this.pointsToClear), this.formatPoints(this.screenshotPoints))
             }
             this.points = [];
 

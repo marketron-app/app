@@ -13,7 +13,8 @@ class Template extends Model
     protected $guarded = [];
 
     protected $casts = [
-        'coordinates' => 'json',
+        'coordinates' => 'array',
+        'raw_data' => 'array'
     ];
 
     public static function convertToTemplate(Template $template): \App\Services\ImageEngine\Template

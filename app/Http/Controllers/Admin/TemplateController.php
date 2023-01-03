@@ -43,7 +43,7 @@ class TemplateController extends Controller
     public function store(StoreTemplateRequest $request)
     {
         $template = $this->templateService->storeTemplate($request);
-        return redirect("admin.templates.index");
+        return redirect(route("templates.index"));
     }
 
     /**

@@ -22,10 +22,10 @@ class TemplateService
             "identifier" => $request->validated("identifier"),
             "title" => $request->validated("title"),
             "description" => $request->validated("description"),
-            "coordinates" => json_encode($request->validated("screenshotCoordinates")),
+            "coordinates" => $request->validated("screenshotCoordinates"),
             "screenshot_width" => $request->validated("screenshotWidth"),
             "screenshot_height" => $request->validated("screenshotHeight"),
-            "raw_data" => json_encode(["screenshotCoordinates" => $request->validated("screenshotCoordinates"), "cutoutCoordinates" => $request->validated("cutoutCoordinates")]),
+            "raw_data" => ["screenshotCoordinates" => $request->validated("screenshotCoordinates"), "cutoutCoordinates" => $request->validated("cutoutCoordinates")],
             "original_image" => $originalImage
         ]);
         return $template;
