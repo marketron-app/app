@@ -15,12 +15,13 @@ class TemplateImageProcessor
         if ($image->getImageAlphaChannel() == Imagick::ALPHACHANNEL_UNDEFINED) {
             $image->setImageAlphaChannel(Imagick::ALPHACHANNEL_TRANSPARENT);
         }
-        $image->setImageFormat("png");
+        $image->setImageFormat('png');
 
         $mask = $this->generateMask($coordinates, $image->getImageWidth(), $image->getImageHeight());
 
         $image->compositeImage($mask, Imagick::COMPOSITE_COPYOPACITY, 0, 0, Imagick::CHANNEL_ALPHA);
         $image->writeImage($templateImagePath);
+
         return $image;
     }
 
@@ -28,13 +29,13 @@ class TemplateImageProcessor
     {
         $draw = new \ImagickDraw();
 
-        $draw->setFillColor("black");
+        $draw->setFillColor('black');
 
         $draw->polygon($coordinates);
 
         $image = new \Imagick();
 
-        $image->newImage($width, $height, "white", "png");
+        $image->newImage($width, $height, 'white', 'png');
         $image->drawImage($draw);
         $image->transparentPaintImage('black', 0.0, 0, false);
 

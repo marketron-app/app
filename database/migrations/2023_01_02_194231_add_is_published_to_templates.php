@@ -14,11 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::table('templates', function (Blueprint $table) {
-            $table->timestamp("published_at")->nullable();
-            $table->json("raw_data");
-            $table->string("original_image");
-            $table->string("url")->nullable()->change();
-            $table->string("thumbnail_url")->nullable()->change();
+            $table->timestamp('published_at')->nullable();
+            $table->json('raw_data');
+            $table->string('original_image');
+            $table->string('url')->nullable()->change();
+            $table->string('thumbnail_url')->nullable()->change();
         });
     }
 
@@ -30,9 +30,9 @@ return new class extends Migration
     public function down()
     {
         Schema::table('templates', function (Blueprint $table) {
-            $table->dropColumn(["published_at", "raw_data", "original_image"]);
-            $table->string("url")->change();
-            $table->string("thumbnail_url")->change();
+            $table->dropColumn(['published_at', 'raw_data', 'original_image']);
+            $table->string('url')->change();
+            $table->string('thumbnail_url')->change();
         });
     }
 };

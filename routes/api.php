@@ -40,4 +40,3 @@ Route::prefix('auth')->group(function () {
         Route::get('callback', [GoogleAuthController::class, 'callback'])->name('google-callback');
     });
 });
-
