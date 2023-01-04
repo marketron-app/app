@@ -22,7 +22,7 @@ class TemplateImageProcessor
         $mask = $this->generateMask($coordinates, $image->getImageWidth(), $image->getImageHeight());
 
         $image->compositeImage($mask, Imagick::COMPOSITE_COPYOPACITY, 0, 0, Imagick::CHANNEL_ALPHA);
-        $image->resizeImage(self::MAX_HEIGHT, self::MAX_WIDTH, Imagick::FILTER_LANCZOS, 0, true);
+        $image->resizeImage(self::MAX_HEIGHT, self::MAX_WIDTH, Imagick::FILTER_POINT, 0, true);
         $image->writeImage($templateImagePath);
 
         return $image;

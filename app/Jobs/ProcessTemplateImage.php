@@ -43,5 +43,8 @@ class ProcessTemplateImage implements ShouldQueue
 
         $imagePath = storage_path('app/'.$template->original_image);
         $img = $imageProcessor->cutoutImage($imagePath, $coordinates, $newImagePath);
+
+        $this->template->url = $newImagePath;
+        $this->template->save();
     }
 }
