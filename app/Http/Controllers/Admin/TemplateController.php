@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Template\StoreTemplateRequest;
+use App\Http\Resources\Admin\Templates\LiteTemplateResource;
+use App\Models\Template;
 use App\Services\Template\TemplateService;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -21,7 +23,10 @@ class TemplateController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Admin/Template/Index');
+        $templates = Template::query()->orderByDesc("id")->paginate(10);
+        return Inertia::render('Admin/Template/Index', [
+            "templates" => LiteTemplateResource::collection($templates)
+        ]);
     }
 
     /**

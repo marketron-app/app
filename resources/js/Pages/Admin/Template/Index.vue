@@ -3,6 +3,15 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, Link } from '@inertiajs/inertia-vue3';
 import {ChevronLeftIcon, ChevronRightIcon, PlusIcon} from "@heroicons/vue/24/solid";
 
+
+</script>
+
+<script>
+export default {
+    props: {
+        templates: Array
+    }
+}
 </script>
 
 <template>
@@ -47,20 +56,20 @@ import {ChevronLeftIcon, ChevronRightIcon, PlusIcon} from "@heroicons/vue/24/sol
                         </tr>
                         </thead>
                         <tbody>
-                        <tr class="bg-white border-b ">
+                        <tr class="bg-white border-b " v-for="template in templates.data" :key="template.id">
                             <th scope="row" class="py-4 px-6">
-                                1
+                                {{template.id}}
                             </th>
                             <td class="py-4 px-6 font-medium whitespace-nowrap">
-                                Android 1
+                                {{template.title}}
                             </td>
                             <td class="py-4 px-6 font-medium whitespace-nowrap">
-                                android-1
+                                {{template.identifier}}
                             </td>
                             <td class="py-4 px-6">
-                                <span class="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800">phone</span>
-                                <span class="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800">android</span>
-                                <span class="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800">vertical</span>
+                                <span class="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800" v-for="tag in template.tags">
+                                    {{tag}}
+                                </span>
                             </td>
                             <td class="py-4 px-6">
                                 <button type="button" class="py-2 px-3 mr-1 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Show</button>
@@ -77,15 +86,16 @@ import {ChevronLeftIcon, ChevronRightIcon, PlusIcon} from "@heroicons/vue/24/sol
 
                 <div class="pt-2">
                     <nav class="isolate inline-flex -space-x-px rounded-md shadow-sm" aria-label="Pagination">
-                        <a href="#" class="relative inline-flex items-center rounded-l-md border border-gray-300 bg-white px-2 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-20">
+                        <a :href="templates.links.prev" class="relative inline-flex items-center rounded-l-md border border-gray-300 bg-white px-2 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-20">
                             <span class="sr-only">Previous</span>
                             <ChevronLeftIcon class="h-5 w-5" aria-hidden="true" />
                         </a>
-                        <a href="#" aria-current="page" class="relative z-10 inline-flex items-center border border-indigo-500 bg-indigo-50 px-4 py-2 text-sm font-medium text-indigo-600 focus:z-20">1</a>
-                        <a href="#" class="relative inline-flex items-center border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-20">2</a>
-                        <span class="relative inline-flex items-center border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700">...</span>
-                        <a href="#" class="relative inline-flex items-center border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-20">10</a>
-                        <a href="#" class="relative inline-flex items-center rounded-r-md border border-gray-300 bg-white px-2 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-20">
+                        <a v-if="templates.links.prev" :href="templates.links.prev" class="relative inline-flex items-center border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-20">{{templates.meta.current_page - 1}}</a>
+                        <a aria-current="page" class="relative z-10 inline-flex items-center border border-indigo-500 bg-indigo-50 px-4 py-2 text-sm font-medium text-indigo-600 focus:z-20">{{templates.meta.current_page}}</a>
+                        <a v-if="templates.links.next" :href="templates.links.next" class="relative inline-flex items-center border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-20">{{templates.meta.current_page + 1}}</a>
+                        <span v-if="templates.meta.current_page + 2 < templates.meta.last_page" class="relative inline-flex items-center border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700">...</span>
+                        <a  v-if="templates.meta.current_page + 1 < templates.meta.last_page" :href="templates.links.last" class="relative inline-flex items-center border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-20">{{templates.meta.last_page}}</a>
+                        <a :href="templates.links.next" class="relative inline-flex items-center rounded-r-md border border-gray-300 bg-white px-2 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-20">
                             <span class="sr-only">Next</span>
                             <ChevronRightIcon class="h-5 w-5" aria-hidden="true" />
                         </a>
