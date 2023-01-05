@@ -6,7 +6,9 @@ use App\Models\Image;
 use App\Models\Template;
 use App\Services\ImageEngine\GenerateImageRequest;
 use App\Services\ImageEngine\ImageEngineService;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ImageService
 {
@@ -17,9 +19,9 @@ class ImageService
     public function createImage(string $templateIdentifier, string $url)
     {
         $template = Template::query()->where('identifier', $templateIdentifier)->firstOrFail();
-        $generateRequest = new GenerateImageRequest($url, $template->url, Template::convertToTemplate($template));
+        $imageSignedUrl = Storage::disk("s3")->temporaryUrl($template->url, Carbon::now()->addMinutes(5));
+        $generateRequest = new GenerateImageRequest($url, $imageSignedUrl, Template::convertToTemplate($template));
         $response = $this->imageEngineService->generateImage($generateRequest);
-
         return Image::query()->create([
             'url' => $url,
             'template_id' => $template->id,

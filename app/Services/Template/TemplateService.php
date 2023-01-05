@@ -17,12 +17,17 @@ class TemplateService
     {
         $originalImageFileName = Uuid::uuid4().'.png';
         $originalImage = $request->file('image')->storeAs('original-images', $originalImageFileName);
-
+        $screenshotCoordinates = $request->validated('screenshotCoordinates');
         $template = Template::query()->create([
             'identifier' => $request->validated('identifier'),
             'title' => $request->validated('title'),
             'description' => $request->validated('description'),
-            'coordinates' => $request->validated('screenshotCoordinates'),
+            'coordinates' => [
+              "left-top" => $screenshotCoordinates[0],
+              "left-bottom" => $screenshotCoordinates[1],
+              "right-bottom" => $screenshotCoordinates[2],
+              "right-top" => $screenshotCoordinates[3],
+            ],
             'screenshot_width' => $request->validated('screenshotWidth'),
             'screenshot_height' => $request->validated('screenshotHeight'),
             'raw_data' => ['screenshotCoordinates' => $request->validated('screenshotCoordinates'), 'cutoutCoordinates' => $request->validated('cutoutCoordinates')],

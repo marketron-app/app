@@ -11,7 +11,7 @@ class ImageEngineService
 
     public function __construct()
     {
-        $this->client = Http::baseUrl(config('image-engine.url'))->timeout(30);
+        $this->client = Http::baseUrl(config('image-engine.url'))->timeout(30)->acceptJson();
     }
 
     public function generateImage(GenerateImageRequest $request)
