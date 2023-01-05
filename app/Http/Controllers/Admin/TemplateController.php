@@ -23,9 +23,10 @@ class TemplateController extends Controller
      */
     public function index()
     {
-        $templates = Template::query()->orderByDesc("id")->paginate(10);
+        $templates = Template::query()->orderByDesc('id')->paginate(10);
+
         return Inertia::render('Admin/Template/Index', [
-            "templates" => LiteTemplateResource::collection($templates)
+            'templates' => LiteTemplateResource::collection($templates),
         ]);
     }
 

@@ -19,9 +19,10 @@ class ImageService
     public function createImage(string $templateIdentifier, string $url)
     {
         $template = Template::query()->where('identifier', $templateIdentifier)->firstOrFail();
-        $imageSignedUrl = Storage::disk("s3")->temporaryUrl($template->url, Carbon::now()->addMinutes(5));
+        $imageSignedUrl = Storage::disk('s3')->temporaryUrl($template->url, Carbon::now()->addMinutes(5));
         $generateRequest = new GenerateImageRequest($url, $imageSignedUrl, Template::convertToTemplate($template));
         $response = $this->imageEngineService->generateImage($generateRequest);
+
         return Image::query()->create([
             'url' => $url,
             'template_id' => $template->id,

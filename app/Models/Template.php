@@ -15,7 +15,7 @@ class Template extends Model
     protected $casts = [
         'coordinates' => 'array',
         'raw_data' => 'array',
-        'tags' => 'array'
+        'tags' => 'array',
     ];
 
     public static function convertToTemplate(Template $template): \App\Services\ImageEngine\Template

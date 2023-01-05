@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('templates', function (Blueprint $table) {
-            $table->json("tags")->nullable();
+            $table->json('tags')->nullable();
         });
     }
 
@@ -26,7 +26,7 @@ return new class extends Migration
     public function down()
     {
         Schema::table('templates', function (Blueprint $table) {
-            $table->dropColumn(["tags"]);
+            $table->dropColumn(['tags']);
         });
     }
 };

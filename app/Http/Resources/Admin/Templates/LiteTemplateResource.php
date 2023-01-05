@@ -15,12 +15,12 @@ class LiteTemplateResource extends JsonResource
     public function toArray($request)
     {
         return [
-            "id" => $this->id,
-            "identifier" => $this->identifier,
-            "title" => $this->title,
-            "description" => $this->description,
-            "tags" => $this->tags,
-            "createdAt" => $this->created_at
+            'id' => $this->id,
+            'identifier' => $this->identifier,
+            'title' => $this->title,
+            'description' => $this->description,
+            'tags' => $this->tags,
+            'createdAt' => $this->created_at,
         ];
     }
 }

@@ -48,7 +48,7 @@ class ProcessTemplateImage implements ShouldQueue
         $this->template->url = $newImagePath;
         $this->template->save();
 
-        $preview = $imageService->createImage($template->identifier, "https://www.marketron.app");
+        $preview = $imageService->createImage($template->identifier, 'https://www.marketron.app');
 
         $this->template->thumbnail_url = $preview->s3_path;
         $this->template->save();
