@@ -5,10 +5,12 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Template\StoreTemplateRequest;
 use App\Http\Resources\Admin\Templates\LiteTemplateResource;
+use App\Http\Resources\Admin\Templates\TemplateResource;
 use App\Models\Template;
 use App\Services\Template\TemplateService;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class TemplateController extends Controller
 {
@@ -56,12 +58,14 @@ class TemplateController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Template $template
+     * @return Response
      */
-    public function show(Template $template)
+    public function show(Template $template): Response
     {
-        //
+        return Inertia::render("Admin/Template/Show", [
+            "template" => TemplateResource::make($template)
+        ]);
     }
 
     /**
