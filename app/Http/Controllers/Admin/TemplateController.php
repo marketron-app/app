@@ -58,13 +58,13 @@ class TemplateController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param Template $template
+     * @param  Template  $template
      * @return Response
      */
     public function show(Template $template): Response
     {
-        return Inertia::render("Admin/Template/Show", [
-            "template" => TemplateResource::make($template)
+        return Inertia::render('Admin/Template/Show', [
+            'template' => TemplateResource::make($template),
         ]);
     }
 
@@ -100,7 +100,7 @@ class TemplateController extends Controller
     public function destroy(Template $template)
     {
         $template->delete();
-        return redirect(route('templates.index'));
 
+        return redirect(route('templates.index'));
     }
 }

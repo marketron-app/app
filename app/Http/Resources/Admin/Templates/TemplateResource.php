@@ -7,6 +7,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 class TemplateResource extends JsonResource
 {
     public static $wrap = null;
+
     /**
      * Transform the resource into an array.
      *
@@ -16,8 +17,8 @@ class TemplateResource extends JsonResource
     public function toArray($request)
     {
         return [
-            "id" => $this->id,
-            "title" => $this->title
+            'id' => $this->id,
+            'title' => $this->title,
         ];
     }
 }
