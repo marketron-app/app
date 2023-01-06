@@ -59,7 +59,7 @@ class TemplateController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Template $template)
     {
         //
     }
@@ -93,8 +93,10 @@ class TemplateController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Template $template)
     {
-        //
+        $template->delete();
+        return redirect(route('templates.index'));
+
     }
 }
