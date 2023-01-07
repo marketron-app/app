@@ -22,7 +22,8 @@ class TemplateResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'identifier' => $this->identifier,
-            "thumbnailImage" => Storage::disk('s3')->temporaryUrl($this->thumbnail_url, Carbon::now()->addMinutes(10))
+            'thumbnailImage' => Storage::disk('s3')->temporaryUrl($this->thumbnail_url, Carbon::now()->addMinutes(10)),
+            'publishedAt' => $this->published_at,
         ];
     }
 }

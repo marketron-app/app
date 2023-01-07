@@ -21,7 +21,7 @@ class LiteTemplateResource extends JsonResource
             'description' => $this->description,
             'tags' => $this->tags,
             'createdAt' => $this->created_at,
-            "publishedAt" => $this->published_at
+            'publishedAt' => $this->published_at,
         ];
     }
 }

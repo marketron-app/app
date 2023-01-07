@@ -13,6 +13,6 @@ Route::delete('/logout', [AuthController::class, 'logout'])->name('admin.logout'
 Route::group(['middleware' => IsAdminMiddleware::class], function () {
     Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
     Route::resource('templates', TemplateController::class);
-    Route::post("templates/{template}/publish", [TemplateController::class, "publish"])->name("templates.publish");
-    Route::post("templates/{template}/unpublish", [TemplateController::class, "unpublish"])->name("templates.unpublish");
+    Route::post('templates/{template}/publish', [TemplateController::class, 'publish'])->name('templates.publish');
+    Route::post('templates/{template}/unpublish', [TemplateController::class, 'unpublish'])->name('templates.unpublish');
 });

@@ -48,7 +48,7 @@ class TemplateController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param StoreTemplateRequest $request
+     * @param  StoreTemplateRequest  $request
      * @return Application|RedirectResponse|Redirector
      */
     public function store(StoreTemplateRequest $request): Redirector|RedirectResponse|Application
@@ -103,20 +103,25 @@ class TemplateController extends Controller
     public function destroy(Template $template)
     {
         $template->delete();
+
         return redirect(route('templates.index'));
     }
 
-    public function publish(Template $template){
+    public function publish(Template $template)
+    {
         $template->update([
-            "published_at" => now()
+            'published_at' => now(),
         ]);
-        return redirect(route("templates.show", ["template" => $template->id]));
+
+        return redirect(route('templates.show', ['template' => $template->id]));
     }
 
-    public function unpublish(Template $template){
+    public function unpublish(Template $template)
+    {
         $template->update([
-            "published_at" => null
+            'published_at' => null,
         ]);
-        return redirect(route("templates.show", ["template" => $template->id]));
+
+        return redirect(route('templates.show', ['template' => $template->id]));
     }
 }

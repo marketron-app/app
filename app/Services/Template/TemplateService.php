@@ -33,7 +33,7 @@ class TemplateService
             'screenshot_height' => $request->validated('screenshotHeight'),
             'raw_data' => ['screenshotCoordinates' => $request->validated('screenshotCoordinates'), 'cutoutCoordinates' => $request->validated('cutoutCoordinates')],
             'original_image' => $originalImage,
-            "tags" => $request->validated("keywords")
+            'tags' => $request->validated('keywords'),
         ]);
 
         ProcessTemplateImage::dispatch($template);
