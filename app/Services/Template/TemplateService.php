@@ -3,6 +3,7 @@
 namespace App\Services\Template;
 
 use App\Http\Requests\Admin\Template\StoreTemplateRequest;
+use App\Jobs\ProcessTemplateImage;
 use App\Models\Template;
 use Ramsey\Uuid\Uuid;
 
@@ -32,7 +33,10 @@ class TemplateService
             'screenshot_height' => $request->validated('screenshotHeight'),
             'raw_data' => ['screenshotCoordinates' => $request->validated('screenshotCoordinates'), 'cutoutCoordinates' => $request->validated('cutoutCoordinates')],
             'original_image' => $originalImage,
+            "tags" => $request->validated("keywords")
         ]);
+
+        ProcessTemplateImage::dispatch($template);
 
         return $template;
     }

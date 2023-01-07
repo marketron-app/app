@@ -1,8 +1,8 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, Link } from '@inertiajs/inertia-vue3';
-import {ChevronLeftIcon, ChevronRightIcon, PlusIcon} from "@heroicons/vue/24/solid";
-
+import {ChevronLeftIcon, ChevronRightIcon, PlusIcon, CheckBadgeIcon} from "@heroicons/vue/24/solid";
+import Popper from "vue3-popper";
 
 </script>
 
@@ -79,7 +79,13 @@ export default {
                         <tbody>
                         <tr class="bg-white border-b " v-for="template in templates.data" :key="template.id">
                             <th scope="row" class="py-4 px-6">
+                                <div class="flex align-items-center justify-content-center">
+                                    <Popper content="This template is published." hover placement="top" v-if="template.publishedAt">
+                                        <CheckBadgeIcon class="h-5 w-5 mr-1 text-blue-500"/>
+                                    </Popper>
+
                                 {{template.id}}
+                                </div>
                             </th>
                             <td class="py-4 px-6 font-medium whitespace-nowrap">
                                 {{template.title}}

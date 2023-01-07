@@ -8,7 +8,10 @@ use App\Http\Resources\Admin\Templates\LiteTemplateResource;
 use App\Http\Resources\Admin\Templates\TemplateResource;
 use App\Models\Template;
 use App\Services\Template\TemplateService;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -21,7 +24,7 @@ class TemplateController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Inertia\Response
+     * @return Response
      */
     public function index()
     {
@@ -35,9 +38,9 @@ class TemplateController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Inertia\Response
+     * @return Response
      */
-    public function create()
+    public function create(): Response
     {
         return Inertia::render('Admin/Template/Create');
     }
@@ -45,10 +48,10 @@ class TemplateController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param StoreTemplateRequest $request
+     * @return Application|RedirectResponse|Redirector
      */
-    public function store(StoreTemplateRequest $request)
+    public function store(StoreTemplateRequest $request): Redirector|RedirectResponse|Application
     {
         $template = $this->templateService->storeTemplate($request);
 

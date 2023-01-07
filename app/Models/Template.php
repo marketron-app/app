@@ -16,6 +16,7 @@ class Template extends Model
         'coordinates' => 'array',
         'raw_data' => 'array',
         'tags' => 'array',
+        "published_at" => "datetime"
     ];
 
     public static function convertToTemplate(Template $template): \App\Services\ImageEngine\Template
