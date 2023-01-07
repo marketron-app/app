@@ -103,7 +103,20 @@ class TemplateController extends Controller
     public function destroy(Template $template)
     {
         $template->delete();
-
         return redirect(route('templates.index'));
+    }
+
+    public function publish(Template $template){
+        $template->update([
+            "published_at" => now()
+        ]);
+        return redirect(route("templates.show", ["template" => $template->id]));
+    }
+
+    public function unpublish(Template $template){
+        $template->update([
+            "published_at" => null
+        ]);
+        return redirect(route("templates.show", ["template" => $template->id]));
     }
 }
