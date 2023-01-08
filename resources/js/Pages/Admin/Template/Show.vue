@@ -30,9 +30,35 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-3">
                 <p class="text-lg">Identifier: <strong>{{template.identifier}}</strong></p>
+                <p class="text-lg">Width: <strong>{{template.screenshotWidth}}</strong></p>
+                <p class="text-lg">Height: <strong>{{template.screenshotHeight}}</strong></p>
 
-                <p class="text-lg font-bold">Thumbnail image:</p>
-                <img class="h-auto max-w-xl rounded-lg shadow-md dark:shadow-gray-800" :src="template.thumbnailImage" alt="image description">
+                <hr class="my-3">
+                <AccordionList>
+                    <AccordionItem>
+                        <template #summary>Media</template>
+                        <template #icon>🖼️</template>
+                        <div>
+
+                            <p class="text-lg font-bold">Thumbnail image:</p>
+                            <img class="h-auto max-w-xl rounded-lg shadow-md dark:shadow-gray-800" :src="template.thumbnailImage" alt="image description">
+                        </div>
+                    </AccordionItem>
+                </AccordionList>
+
+                <hr class="my-3">
+
+                <AccordionList>
+                    <AccordionItem>
+                        <template #summary>Coordinates</template>
+                        <template #icon>️🧭</template>
+                        <div>
+
+                            <p class="text-lg font-bold">Screenshot coordinates</p>
+                            <pre class="" v-html="JSON.stringify(template.screenshotCoordinates, null, 2)"></pre>
+                        </div>
+                    </AccordionItem>
+                </AccordionList>
 
 
             </div>

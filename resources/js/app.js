@@ -10,6 +10,8 @@ import VueSimpleAlert from "vue3-simple-alert";
 import 'sweetalert2/dist/sweetalert2.min.css';
 import Toaster from "@meforma/vue-toaster";
 import "../css/tooltip.css"
+import { useAccordion } from "vue3-rich-accordion";
+import "vue3-rich-accordion/accordion-library-styles.css";
 
 const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel';
 
@@ -22,6 +24,7 @@ createInertiaApp({
             .use(ZiggyVue, Ziggy)
             .use(VueSimpleAlert)
             .use(Toaster)
+            .use(useAccordion)
             .mount(el);
     },
 });
