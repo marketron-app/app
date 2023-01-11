@@ -2,6 +2,7 @@
 
 namespace App\Services\Template;
 
+use App\Services\ImageEngine\Template;
 use Illuminate\Support\Facades\Storage;
 use Imagick;
 
@@ -14,10 +15,10 @@ class TemplateImageProcessor
     /**
      * @throws \ImagickException
      */
-    public function cutoutImage(string $rawImagePath, array $coordinates, string $templateImagePath)
+    public function cutoutImage(string $rawImagePath, array $coordinates, string $templateImagePath, \App\Models\Template $template)
     {
-        $tmpPath = storage_path('app/cutout-images/'.$templateImagePath);
         $image = new Imagick($rawImagePath);
+
         if ($image->getImageAlphaChannel() == Imagick::ALPHACHANNEL_UNDEFINED) {
             $image->setImageAlphaChannel(Imagick::ALPHACHANNEL_TRANSPARENT);
         }
@@ -26,12 +27,35 @@ class TemplateImageProcessor
         $mask = $this->generateMask($coordinates, $image->getImageWidth(), $image->getImageHeight());
 
         $image->compositeImage($mask, Imagick::COMPOSITE_COPYOPACITY, 0, 0, Imagick::CHANNEL_ALPHA);
-        $image->resizeImage(self::MAX_HEIGHT, self::MAX_WIDTH, Imagick::FILTER_POINT, 0, true);
-        $image->writeImage($tmpPath);
-        Storage::disk('s3')->put($templateImagePath, file_get_contents($tmpPath));
-        unlink($tmpPath);
+
+        $image = $this->resizeImage($image, $template);
+        $this->uploadAndDeleteImage($templateImagePath, $image);
 
         return $image;
+    }
+
+    /**
+     * @throws \ImagickException
+     */
+    public function resizeImage(Imagick $image, \App\Models\Template $template): Imagick
+    {
+        $originalWidth = $image->getImageWidth();
+        $originalHeight = $image->getImageHeight();
+
+        $image->resizeImage(self::MAX_HEIGHT, self::MAX_WIDTH, Imagick::FILTER_POINT, 0, true);
+        $newWidth = $image->getImageWidth();
+        $newHeight = $image->getImageHeight();
+
+        $xScale = $newWidth / $originalWidth;
+        $yScale = $newHeight / $originalHeight;
+        $this->scaleCoordinates($xScale, $yScale, $template);
+
+        return $image;
+    }
+
+    public function uploadAndDeleteImage(string $templateImagePath, Imagick $imagick): void
+    {
+        Storage::disk('s3')->put($templateImagePath, $imagick);
     }
 
     public function generateMask(array $coordinates, int $width, int $height): Imagick
@@ -49,5 +73,17 @@ class TemplateImageProcessor
         $image->transparentPaintImage('black', 0.0, 0, false);
 
         return $image;
+    }
+
+    /**
+     * This method scales the coordinates of the screenshot image based on scaling factor of the image
+     * @return void
+     *
+     */
+    public function scaleCoordinates($xScale, $yScale, \App\Models\Template $template){
+        $coordinates = $template->coordinates;
+        $coordinates = collect($coordinates)->map(fn($el) => ["x" => $el["x"] * $xScale, "y" => $el["y"] * $yScale]);
+        $template->coordinates = $coordinates;
+        $template->save();
     }
 }

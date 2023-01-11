@@ -37,19 +37,19 @@ class GenerateImageRequest
         return [
             [
                 'x' => intval($this->getTemplate()->getLeftTop()->x),
-                'y' => intval($this->getTemplate()->getLeftTop()->x),
+                'y' => intval($this->getTemplate()->getLeftTop()->y),
             ],
             [
                 'x' => intval($this->getTemplate()->getLeftBottom()->x),
-                'y' => intval($this->getTemplate()->getLeftBottom()->x),
+                'y' => intval($this->getTemplate()->getLeftBottom()->y),
             ],
             [
                 'x' => intval($this->getTemplate()->getRightBottom()->x),
-                'y' => intval($this->getTemplate()->getRightBottom()->x),
+                'y' => intval($this->getTemplate()->getRightBottom()->y),
             ],
             [
                 'x' => intval($this->getTemplate()->getRightTop()->x),
-                'y' => intval($this->getTemplate()->getRightTop()->x),
+                'y' => intval($this->getTemplate()->getRightTop()->y),
             ],
         ];
     }
