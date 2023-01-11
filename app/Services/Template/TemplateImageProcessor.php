@@ -2,7 +2,6 @@
 
 namespace App\Services\Template;
 
-use App\Services\ImageEngine\Template;
 use Illuminate\Support\Facades\Storage;
 use Imagick;
 
@@ -77,12 +76,13 @@ class TemplateImageProcessor
 
     /**
      * This method scales the coordinates of the screenshot image based on scaling factor of the image
-     * @return void
      *
+     * @return void
      */
-    public function scaleCoordinates($xScale, $yScale, \App\Models\Template $template){
+    public function scaleCoordinates($xScale, $yScale, \App\Models\Template $template)
+    {
         $coordinates = $template->coordinates;
-        $coordinates = collect($coordinates)->map(fn($el) => ["x" => $el["x"] * $xScale, "y" => $el["y"] * $yScale]);
+        $coordinates = collect($coordinates)->map(fn ($el) => ['x' => $el['x'] * $xScale, 'y' => $el['y'] * $yScale]);
         $template->coordinates = $coordinates;
         $template->save();
     }
