@@ -32,4 +32,8 @@ class Template extends Model
             $template->screenshot_height
         );
     }
+
+    public function scopePublished($query){
+        $query->whereNotNull("published_at");
+    }
 }

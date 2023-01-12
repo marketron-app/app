@@ -2,7 +2,9 @@
 
 namespace App\Http\Resources\Templates;
 
+use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Storage;
 
 class TemplateResource extends JsonResource
 {
@@ -19,6 +21,7 @@ class TemplateResource extends JsonResource
             'image' => $this->thumbnail_url,
             'description' => $this->description,
             'name' => $this->title,
+            'thumbnailImage' => Storage::disk('s3')->temporaryUrl($this->thumbnail_url, Carbon::now()->addMinutes(10)),
         ];
     }
 }
