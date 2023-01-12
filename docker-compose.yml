@@ -72,7 +72,7 @@ services:
             retries: 3
             timeout: 5s
     imageengine:
-        image: 'tavsec/marketron-image-engine:0.0.3'
+        image: 'tavsec/marketron-image-engine:v0.0.4'
         expose:
             - 3000
         ports:
