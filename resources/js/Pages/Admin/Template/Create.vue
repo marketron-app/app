@@ -1,5 +1,5 @@
 <script setup>
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import AuthenticatedLayout from '@/Layouts/Admin/AuthenticatedLayout.vue';
 import {Head, useForm} from '@inertiajs/inertia-vue3';
 import InputLabel from "@/Components/InputLabel.vue";
 import TextInput from "@/Components/TextInput.vue";

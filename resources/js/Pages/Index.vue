@@ -1,155 +1,83 @@
 <script setup>
-import { ref } from 'vue'
-import { Dialog, DialogPanel } from '@headlessui/vue'
-import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline'
+import {ref} from 'vue'
+import {Dialog, DialogPanel} from '@headlessui/vue'
+import {Bars3Icon, XMarkIcon} from '@heroicons/vue/24/outline'
+import DefaultLayout from "@/Layouts/Default.vue";
 
-const navigation = [
-]
+const navigation = []
 
 const mobileMenuOpen = ref(false)
 </script>
 
 <template>
-    <div class="isolate bg-white">
-        <div class="absolute inset-x-0 top-[-10rem] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[-20rem]">
-            <svg class="relative left-[calc(50%-11rem)] -z-10 h-[21.1875rem] max-w-none -translate-x-1/2 rotate-[30deg] sm:left-[calc(50%-30rem)] sm:h-[42.375rem]" viewBox="0 0 1155 678" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path fill="url(#45de2b6b-92d5-4d68-a6a0-9b9b2abad533)" fill-opacity=".3" d="M317.219 518.975L203.852 678 0 438.341l317.219 80.634 204.172-286.402c1.307 132.337 45.083 346.658 209.733 145.248C936.936 126.058 882.053-94.234 1031.02 41.331c119.18 108.451 130.68 295.337 121.53 375.223L855 299l21.173 362.054-558.954-142.079z" />
-                <defs>
-                    <linearGradient id="45de2b6b-92d5-4d68-a6a0-9b9b2abad533" x1="1155.49" x2="-78.208" y1=".177" y2="474.645" gradientUnits="userSpaceOnUse">
-                        <stop stop-color="#9089FC" />
-                        <stop offset="1" stop-color="#FF80B5" />
-                    </linearGradient>
-                </defs>
-            </svg>
-        </div>
-        <div class="px-6 pt-6 lg:px-8">
-            <div>
-                <nav class="flex h-9 items-center justify-between" aria-label="Global">
-                    <div class="flex lg:min-w-0 lg:flex-1" aria-label="Global">
-                        <a href="#" class="-m-1.5 p-1.5">
-                            <span class="sr-only">Marketron</span>
-                            <img class="h-8" src="/images/marketron-cropped.png" alt="" />
-                        </a>
-                    </div>
-                    <div class="flex lg:hidden">
-                        <button type="button" class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700" @click="mobileMenuOpen = true">
-                            <span class="sr-only">Open main menu</span>
-                            <Bars3Icon class="h-6 w-6" aria-hidden="true" />
-                        </button>
-                    </div>
-                    <div class="hidden lg:flex lg:min-w-0 lg:flex-1 lg:justify-center lg:gap-x-12">
-                        <a v-for="item in navigation" :key="item.name" :href="item.href" class="font-semibold text-gray-900 hover:text-gray-900">{{ item.name }}</a>
-                    </div>
-                    <div class="hidden lg:flex lg:min-w-0 lg:flex-1 lg:justify-end">
-                        <a href="#" class="inline-block rounded-lg px-3 py-1.5 text-sm font-semibold leading-6 text-gray-900 shadow-sm ring-1 ring-gray-900/10 hover:ring-gray-900/20">Log in</a>
-                    </div>
-                </nav>
-                <Dialog as="div" @close="mobileMenuOpen = false" :open="mobileMenuOpen">
-                    <DialogPanel focus="true" class="fixed inset-0 z-10 overflow-y-auto bg-white px-6 py-6 lg:hidden">
-                        <div class="flex h-9 items-center justify-between">
-                            <div class="flex">
-                                <a href="#" class="-m-1.5 p-1.5">
-                                    <span class="sr-only">Marketron</span>
-                                    <img class="h-8" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="" />
-                                </a>
-                            </div>
-                            <div class="flex">
-                                <button type="button" class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700" @click="mobileMenuOpen = false">
-                                    <span class="sr-only">Close menu</span>
-                                    <XMarkIcon class="h-6 w-6" aria-hidden="true" />
-                                </button>
-                            </div>
-                        </div>
-                        <div class="mt-6 flow-root">
-                            <div class="-my-6 divide-y divide-gray-500/10">
-                                <div class="space-y-2 py-6">
-                                    <a v-for="item in navigation" :key="item.name" :href="item.href" class="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-400/10">{{ item.name }}</a>
-                                </div>
-                                <div class="py-6">
-                                    <a href="#" class="-mx-3 block rounded-lg py-2.5 px-3 text-base font-semibold leading-6 text-gray-900 hover:bg-gray-400/10">Log in</a>
+    <default-layout>
+        <div class="isolate bg-white">
+            <main>
+                <div class="relative px-6 lg:px-8">
+                    <div class="mx-auto max-w-3xl pt-20 pb-32 sm:pt-48 sm:pb-40">
+                        <div>
+                            <div>
+                                <h1 class="text-4xl font-bold tracking-tight sm:text-center sm:text-6xl">Marketron</h1>
+                                <p class="mt-6 text-lg leading-8 text-gray-600 sm:text-center">Create mockup previews on
+                                    different devices, without the need to use image editors. Just enter your website
+                                    URL, select template and generate your mockup!</p>
+                                <div class="mt-8 flex gap-x-4 sm:justify-center">
+                                    <a href="#"
+                                       class="inline-block rounded-lg bg-indigo-600 px-4 py-1.5 text-base font-semibold leading-7 text-white shadow-sm ring-1 ring-indigo-600 hover:bg-indigo-700 hover:ring-indigo-700">
+                                        Get started
+                                        <span class="text-indigo-200" aria-hidden="true">&rarr;</span>
+                                    </a>
                                 </div>
                             </div>
-                        </div>
-                    </DialogPanel>
-                </Dialog>
-            </div>
-        </div>
-        <main>
-            <div class="relative px-6 lg:px-8">
-                <div class="mx-auto max-w-3xl pt-20 pb-32 sm:pt-48 sm:pb-40">
-                    <div>
-                        <div class="hidden sm:mb-8 sm:flex sm:justify-center">
-                        </div>
-                        <div>
-                            <h1 class="text-4xl font-bold tracking-tight sm:text-center sm:text-6xl">Marketron</h1>
-                            <p class="mt-6 text-lg leading-8 text-gray-600 sm:text-center">Create mockup previews on different devices, without the need to use image editors. Just enter your website URL, select template and generate your mockup!</p>
-                            <div class="mt-8 flex gap-x-4 sm:justify-center">
-                                <a href="#" class="inline-block rounded-lg bg-indigo-600 px-4 py-1.5 text-base font-semibold leading-7 text-white shadow-sm ring-1 ring-indigo-600 hover:bg-indigo-700 hover:ring-indigo-700">
-                                    Get started
-                                    <span class="text-indigo-200" aria-hidden="true">&rarr;</span>
-                                </a>
+                            <div
+                                class="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]">
+
                             </div>
                         </div>
-                        <div class="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]">
-
-                        </div>
                     </div>
                 </div>
-            </div>
-        </main>
-    </div>
+            </main>
+        </div>
 
-    <div class="bg-white">
-        <div class="mx-auto max-w-2xl py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
-            <h2 class="text-2xl font-bold tracking-tight text-gray-900">Some of our templates</h2>
+        <div class="bg-white">
+            <div class="mx-auto max-w-2xl py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
+                <h2 class="text-2xl font-bold tracking-tight text-gray-900">Some of our templates</h2>
 
-            <div class="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-                <div v-for="template in templates.data" :key="template.id" class="group relative">
-                    <div class="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-80">
-                        <img :src="template.thumbnailImage" alt="Template previews" class="h-full w-full object-cover object-center lg:h-full lg:w-full" />
-                    </div>
-                    <div class="mt-4 flex justify-between">
-                        <div>
-                            <h3 class="text-sm text-gray-700">
-                                <a href="#">
-                                    <span aria-hidden="true" class="absolute inset-0" />
-                                    {{ template.title }}
-                                </a>
-                            </h3>
+                <div class="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+                    <div v-for="template in templates.data" :key="template.id" class="group relative">
+                        <div
+                            class="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-80">
+                            <img :src="template.thumbnailImage" alt="Template previews"
+                                 class="h-full w-full object-cover object-center lg:h-full lg:w-full"/>
+                        </div>
+                        <div class="mt-4 flex justify-between">
+                            <div>
+                                <h3 class="text-sm text-gray-700">
+                                    <a :href="'/image?identifier=' + template.identifier">
+                                        <span aria-hidden="true" class="absolute inset-0"/>
+                                        {{ template.title }}
+                                    </a>
+                                </h3>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </default-layout>
 
-    <div class="bg-gray-50">
-        <div class="mx-auto max-w-7xl py-12 px-6 lg:flex lg:items-center lg:justify-between lg:py-16 lg:px-8">
-            <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-                <span class="block">Ready to generate your first image?</span>
-            </h2>
-            <div class="mt-8 flex lg:mt-0 lg:flex-shrink-0">
-                <div class="inline-flex rounded-md shadow">
-                    <a href="#" class="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-5 py-3 text-base font-medium text-white hover:bg-indigo-700">Get started</a>
-                </div>
-            </div>
-        </div>
-    </div>
 </template>
 
 <script>
 export default {
     name: 'IndexPage',
     data() {
-        return {
-
-        }
+        return {}
     },
     props: {
-      templates: Array
+        templates: Object
     },
-    methods: {
-    },
+    methods: {},
 }
 </script>
 

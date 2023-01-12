@@ -1,6 +1,6 @@
 <script setup>
 import {Head} from '@inertiajs/inertia-vue3';
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import AuthenticatedLayout from '@/Layouts/Admin/AuthenticatedLayout.vue';
 
 </script>
 

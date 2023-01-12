@@ -1,5 +1,5 @@
 <script setup>
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import AuthenticatedLayout from '@/Layouts/Admin/AuthenticatedLayout.vue';
 import { Head, Link } from '@inertiajs/inertia-vue3';
 import {ChevronLeftIcon, ChevronRightIcon, PlusIcon, CheckBadgeIcon} from "@heroicons/vue/24/solid";
 import Popper from "vue3-popper";
