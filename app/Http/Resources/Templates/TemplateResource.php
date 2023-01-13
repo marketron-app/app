@@ -17,6 +17,7 @@ class TemplateResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'id' => $this->id,
             'identifier' => $this->identifier,
             'image' => $this->thumbnail_url,
             'description' => $this->description,

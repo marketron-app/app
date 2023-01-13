@@ -21,7 +21,7 @@ class ImageController extends Controller
         $otherTemplates = Template::query()->published()->whereNot("id", $selectedTemplate?->id)->inRandomOrder()->take(10)->get();
 
         return Inertia::render("Image/Index", [
-            "selectedTemplate" => TemplateResource::make($selectedTemplate) ?? null,
+            "prefilledTemplate" => $selectedTemplate ? TemplateResource::make($selectedTemplate) : null,
             "otherTemplates" => TemplateResource::collection($otherTemplates)
         ]);
     }
