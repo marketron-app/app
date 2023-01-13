@@ -4,17 +4,22 @@
         <main>
             <div class="relative px-6 lg:px-8">
                 <div class="mx-auto max-w-5xl pt-10 pb-10 sm:pt-15 sm:pb-15">
-                    <div class="w-full">
-                        <InputLabel for="url" value="Website URL" />
-                        <TextInput
-                            id="url"
-                            type="text"
-                            class="mt-1 block w-full"
-                            v-model="this.form.url"
-                            required
-                            autofocus
-                            autocomplete="url"
-                        />
+                    <div class="flex">
+                        <div class="w-full">
+                            <InputLabel for="url" value="Website URL" />
+                            <div class="flex">
+                                <TextInput
+                                    id="url"
+                                    type="text"
+                                    class="mt-1 block w-10/12"
+                                    v-model="this.form.url"
+                                    required
+                                    autofocus
+                                    autocomplete="url"
+                                />
+                                <button class="inline-flex w-2/12 items-center justify-center rounded-md border border-transparent bg-indigo-600 px-5 py-3 text-base font-medium text-white hover:bg-indigo-700">Generate</button>
+                            </div>
+                        </div>
                     </div>
 
                     <h2 class="mt-3 mb-0 text-xl">Select template</h2>
@@ -54,6 +59,8 @@
                             </div>
                         </div>
                     </div>
+
+
                 </div>
             </div>
         </main>
@@ -93,6 +100,7 @@ export default {
 
 <style scoped>
 .selected{
-    border: 2px solid red;
+    box-shadow: 10px 10px 8px -8px rgba(0,0,0,0.75);
+    border: 2px solid blueviolet;
 }
 </style>
