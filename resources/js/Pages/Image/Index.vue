@@ -1,5 +1,25 @@
+<script setup>
+
+</script>
 <template>
 <default-layout>
+    <modal :show="showLoadingModal" :closeable="false">
+        <div class="m-5 p-5 text-center">
+            <h1 class="font-bold text-2xl">We are generating your image...</h1>
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-10 w-10 flex-1 animate-spin stroke-current stroke-[3] mx-auto mt-5"
+                fill="none"
+                viewBox="0 0 24 24"
+            >
+                <path
+                    d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
+                    class="stroke-current opacity-25"
+                />
+                <path d="M12 2C6.47715 2 2 6.47715 2 12C2 14.7255 3.09032 17.1962 4.85857 19" />
+            </svg>
+        </div>
+    </modal>
     <div class="isolate bg-white">
         <main>
             <form class="relative px-6 lg:px-8" @submit.prevent="submit">
@@ -55,10 +75,11 @@ import {useForm} from "@inertiajs/inertia-vue3";
 import DefaultLayout from "@/Layouts/Default.vue";
 import TextInput from "@/Components/TextInput.vue";
 import InputLabel from "@/Components/InputLabel.vue";
-import {Inertia} from "@inertiajs/inertia";
+import Modal from "@/Components/Modal.vue";
+
 export default {
     name: "Index.vue",
-    components: {InputLabel, TextInput, DefaultLayout},
+    components: {Modal, InputLabel, TextInput, DefaultLayout},
     mounted() {
         if (this.prefilledTemplate){
             this.selectTemplate(this.prefilledTemplate.data)
@@ -69,7 +90,8 @@ export default {
           form: useForm({
               url: ""
           }),
-          selectedTemplate: null
+          selectedTemplate: null,
+          showLoadingModal: false
       }
     },
     props: {
@@ -86,7 +108,10 @@ export default {
                     ...data,
                     template: this.selectedTemplate.identifier
                 }))
-                .post(this.route("images.store"))
+                .post(this.route("images.store"), {
+                    onStart: () => {this.showLoadingModal = true},
+                    onFinish: () => {this.showLoadingModal = false}
+                })
         }
     },
     computed: {
