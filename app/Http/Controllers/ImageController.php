@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Image\StoreImageRequest;
 use App\Http\Resources\Images\ImageResource;
 use App\Http\Resources\Templates\TemplateResource;
+use App\Models\Image;
 use App\Models\Template;
 use App\Services\Image\ImageService;
 use Illuminate\Http\Request;
@@ -27,19 +28,21 @@ class ImageController extends Controller
     }
 
 
-    public function store(StoreImageRequest $request): ImageResource
+    public function store(StoreImageRequest $request): \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
     {
         $image = $this->imageService->createImage(
             (string) $request->validated('template'),
             (string) $request->validated('url'),
         );
 
-        return ImageResource::make($image);
+        return redirect(route("images.show", ["image" => $image]));
     }
 
-    public function show($id)
+    public function show(Image $image)
     {
-        //
+        return Inertia::render("Image/Show", [
+            "image" => ImageResource::make($image)
+        ]);
     }
 
 

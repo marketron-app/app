@@ -26,9 +26,6 @@ Route::prefix('templates')->group(function () {
     Route::get('', [TemplateController::class, 'index']);
 });
 
-Route::prefix('images')->group(function () {
-    Route::post('', [ImageController::class, 'store']);
-});
 
 Route::prefix('auth')->group(function () {
     Route::prefix('github')->group(function () {
