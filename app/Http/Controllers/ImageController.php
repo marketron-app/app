@@ -16,17 +16,17 @@ class ImageController extends Controller
     public function __construct(private ImageService $imageService)
     {
     }
+
     public function index(Request $request)
     {
-        $selectedTemplate = Template::query()->where("identifier", $request->query("identifier"))->first();
-        $otherTemplates = Template::query()->published()->whereNot("id", $selectedTemplate?->id)->inRandomOrder()->take(10)->get();
+        $selectedTemplate = Template::query()->where('identifier', $request->query('identifier'))->first();
+        $otherTemplates = Template::query()->published()->whereNot('id', $selectedTemplate?->id)->inRandomOrder()->take(10)->get();
 
-        return Inertia::render("Image/Index", [
-            "prefilledTemplate" => $selectedTemplate ? TemplateResource::make($selectedTemplate) : null,
-            "otherTemplates" => TemplateResource::collection($otherTemplates)
+        return Inertia::render('Image/Index', [
+            'prefilledTemplate' => $selectedTemplate ? TemplateResource::make($selectedTemplate) : null,
+            'otherTemplates' => TemplateResource::collection($otherTemplates),
         ]);
     }
-
 
     public function store(StoreImageRequest $request): \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
     {
@@ -35,15 +35,13 @@ class ImageController extends Controller
             (string) $request->validated('url'),
         );
 
-        return redirect(route("images.show", ["image" => $image]));
+        return redirect(route('images.show', ['image' => $image]));
     }
 
     public function show(Image $image)
     {
-        return Inertia::render("Image/Show", [
-            "image" => ImageResource::make($image)
+        return Inertia::render('Image/Show', [
+            'image' => ImageResource::make($image),
         ]);
     }
-
-
 }

@@ -16,8 +16,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', IndexController::class);
-Route::prefix("image")->group(function(){
-    Route::get("", [ImageController::class, "index"])->name("images.index");
-    Route::post('', [ImageController::class, 'store'])->name("images.store");
-    Route::get('{image}', [ImageController::class, 'show'])->name("images.show");
+Route::prefix('image')->group(function () {
+    Route::get('', [ImageController::class, 'index'])->name('images.index');
+    Route::post('', [ImageController::class, 'store'])->name('images.store');
+    Route::get('{image}', [ImageController::class, 'show'])->name('images.show');
 });

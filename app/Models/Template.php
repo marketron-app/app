@@ -33,7 +33,8 @@ class Template extends Model
         );
     }
 
-    public function scopePublished($query){
-        $query->whereNotNull("published_at");
+    public function scopePublished($query)
+    {
+        $query->whereNotNull('published_at');
     }
 }

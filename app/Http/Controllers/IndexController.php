@@ -18,8 +18,9 @@ class IndexController extends Controller
     public function __invoke(Request $request)
     {
         $templates = Template::query()->published()->inRandomOrder()->take(5)->get();
+
         return Inertia::render('Index', [
-            "templates" => TemplateResource::collection($templates)
+            'templates' => TemplateResource::collection($templates),
         ]);
     }
 }
