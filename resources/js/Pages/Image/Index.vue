@@ -24,7 +24,7 @@
 
                     <h2 class="mt-3 mb-0 text-xl">Select template</h2>
                     <div class="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-                        <div v-if="prefilledTemplate" class="group relative" @click="selectTemplate(prefilledTemplate)" :class="{selected: prefilledTemplate.id === selectedTemplate?.id}">
+                        <div v-if="prefilledTemplate" class="group relative" @click="selectTemplate(prefilledTemplate.data)" :class="{selected: prefilledTemplate.data.id === selectedTemplate?.id}">
                             <div
                                 class="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-full">
                                 <img :src="prefilledTemplate.data.thumbnailImage" alt="Template previews"
@@ -61,7 +61,7 @@ export default {
     components: {InputLabel, TextInput, DefaultLayout},
     mounted() {
         if (this.prefilledTemplate){
-            this.selectTemplate(this.prefilledTemplate)
+            this.selectTemplate(this.prefilledTemplate.data)
         }
     },
     data(){
