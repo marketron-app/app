@@ -27,11 +27,11 @@ Route::prefix('templates')->group(function () {
 
 Route::prefix('auth')->group(function () {
     Route::prefix('github')->group(function () {
-        Route::get('redirect', [GithubAuthController::class, 'redirect']);
+        Route::get('redirect', [GithubAuthController::class, 'redirect'])->name("google-redirect");
         Route::get('callback', [GithubAuthController::class, 'callback'])->name('github-callback');
     });
     Route::prefix('google')->group(function () {
-        Route::get('redirect', [GoogleAuthController::class, 'redirect']);
+        Route::get('redirect', [GoogleAuthController::class, 'redirect'])->name("github-redirect");
         Route::get('callback', [GoogleAuthController::class, 'callback'])->name('google-callback');
     });
 });
