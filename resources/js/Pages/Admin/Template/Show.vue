@@ -75,10 +75,10 @@ export default {
     },
     methods: {
         publish(){
-            this.$inertia.post(this.route("templates.publish", this.template.id))
+            this.$inertia.post(this.route("admin.templates.publish", this.template.id))
         },
         unpublish(){
-            this.$inertia.post(this.route("templates.unpublish", this.template.id))
+            this.$inertia.post(this.route("admin.templates.unpublish", this.template.id))
         }
     }
 }

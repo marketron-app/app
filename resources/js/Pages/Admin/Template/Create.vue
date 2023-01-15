@@ -41,7 +41,7 @@ export default {
         },
         submit(){
             this.form.keywords = this.keywords
-            this.form.post(route('templates.store'), {
+            this.form.post(route('admin.templates.store'), {
                 onFinish: () => this.form.reset(),
             });
         },

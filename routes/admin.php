@@ -6,12 +6,12 @@ use App\Http\Controllers\Admin\TemplateController;
 use App\Http\Middleware\IsAdminMiddleware;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/login', [AuthController::class, 'index'])->name('admin.login');
-Route::post('/login', [AuthController::class, 'login']);
-Route::delete('/logout', [AuthController::class, 'logout'])->name('admin.logout');
+Route::get('/login', [AuthController::class, 'index'])->name('login.index');
+Route::post('/login', [AuthController::class, 'login'])->name("login");
+Route::delete('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::group(['middleware' => IsAdminMiddleware::class], function () {
-    Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('templates', TemplateController::class);
     Route::post('templates/{template}/publish', [TemplateController::class, 'publish'])->name('templates.publish');
     Route::post('templates/{template}/unpublish', [TemplateController::class, 'unpublish'])->name('templates.unpublish');

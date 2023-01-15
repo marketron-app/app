@@ -23,19 +23,19 @@ export default {
                 "Template delete",
                 "warning"
             ).then(async () => {
-                this.$inertia.delete(this.route("templates.destroy", id))
+                this.$inertia.delete(this.route("admin.templates.destroy", id))
             }).catch((e) => {
                 this.$toast.error(e);
             });
         },
         show(id){
-            this.$inertia.get(this.route("templates.show", id))
+            this.$inertia.get(this.route("admin.templates.show", id))
         },
         publish(id){
-            this.$inertia.post(this.route("templates.publish", id))
+            this.$inertia.post(this.route("admin.templates.publish", id))
         },
         unpublish(id){
-            this.$inertia.post(this.route("templates.unpublish", id))
+            this.$inertia.post(this.route("admin.templates.unpublish", id))
         }
     }
 }
@@ -52,7 +52,7 @@ export default {
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mb-3">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-3">
-                    <Link :href="route('templates.create')" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                    <Link :href="route('admin.templates.create')" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
                         <div class="inline-flex items-center">
                         New template
                         <PlusIcon class="ml-1 h-4 w-4" />
