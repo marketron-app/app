@@ -7,7 +7,7 @@ use App\Http\Middleware\IsAdminMiddleware;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/login', [AuthController::class, 'index'])->name('login.index');
-Route::post('/login', [AuthController::class, 'login'])->name("login");
+Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::delete('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::group(['middleware' => IsAdminMiddleware::class], function () {

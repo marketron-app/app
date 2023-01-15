@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', IndexController::class);
-Route::get("login", [AuthController::class, "index"]);
+Route::get('login', [AuthController::class, 'index']);
 
 Route::prefix('image')->group(function () {
     Route::get('', [ImageController::class, 'index'])->name('images.index');
