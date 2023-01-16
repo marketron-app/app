@@ -95,16 +95,20 @@ export default {
             pointsCanvas: null,
             pointsCanvasCtx: null,
             pointsToClear: [],
-            screenshotPoints: []
+            screenshotPoints: [],
         }
     },
     mounted() {
         this.canvas = document.getElementById('image-canvas');
         this.pointsCanvas = document.getElementById('points-canvas');
         this.pointsCanvas.addEventListener("click", this.onCanvasClick)
+        this.pointsCanvas.addEventListener("mousedown", this.handleMouseDown)
+        this.pointsCanvas.addEventListener("mousemove", this.handleMouseMove)
+        this.pointsCanvas.addEventListener("mouseup", this.handleMouseUp)
 
         this.canvasCtx = this.canvas.getContext("2d")
         this.pointsCanvasCtx = this.pointsCanvas.getContext("2d")
+
     },
     watch: {
         points: {
@@ -159,21 +163,29 @@ export default {
 
         },
         onCanvasClick(e) {
+            if (this.mouseIsDown) {
+                return;
+            }
+
             let rect = this.pointsCanvas.getBoundingClientRect();
             let x = e.clientX - rect.left;
             let y = e.clientY - rect.top;
-            this.points.push({x, y})
+            let width = 10;
+            let height = 10;
+
+            const path = new Path2D()
+            path.rect(x - width/2, y - height/2, width, height)
+            this.points.push({x, y, width, height, path})
         },
         redraw() {
             this.pointsCanvasCtx.clearRect(0, 0, this.pointsCanvasCtx.canvas.width, this.pointsCanvasCtx.canvas.height)
-
         },
         drawPoints() {
             this.redraw()
             this.pointsCanvasCtx.fillStyle = "rgba(255,0,0,0.57)"
             this.pointsCanvasCtx.beginPath()
             this.points.forEach((value, i) => {
-                this.pointsCanvasCtx.fillRect(value.x - 2.5, value.y - 2.5, 5, 5)
+                this.pointsCanvasCtx.fillRect(value.x - value.width/2, value.y - value.height/2, value.width, value.height)
                 this.pointsCanvasCtx.lineTo(value.x, value.y)
             })
             this.pointsCanvasCtx.closePath()
@@ -193,6 +205,28 @@ export default {
             this.points = [];
 
             this.pointsCanvasCtx.fillStyle = "rgba(0,72,255,0.57)"
+        },
+
+        handleMouseMove(e) {
+
+            const mouseX = parseInt(e.clientX - this.pointsCanvas.getBoundingClientRect().left);
+            const mouseY = parseInt(e.clientY - this.pointsCanvas.getBoundingClientRect().top);
+
+
+            let isHoveringPoints = false;
+            for (let i = 0; i < this.points.length; i++) {
+                const point = this.points[i];
+
+                if (this.pointsCanvasCtx.isPointInPath(point.path, mouseX, mouseY)) {
+                    isHoveringPoints = true
+                }
+            }
+
+            if(isHoveringPoints){
+                document.body.style.cursor = 'pointer';
+            }else{
+                document.body.style.cursor = 'unset';
+            }
         }
     }
 }
