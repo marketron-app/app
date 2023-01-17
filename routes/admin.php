@@ -15,4 +15,5 @@ Route::group(['middleware' => IsAdminMiddleware::class], function () {
     Route::resource('templates', TemplateController::class);
     Route::post('templates/{template}/publish', [TemplateController::class, 'publish'])->name('templates.publish');
     Route::post('templates/{template}/unpublish', [TemplateController::class, 'unpublish'])->name('templates.unpublish');
+    Route::post('templates/{template}/update-template-image', [TemplateController::class, 'updateTemplateImage'])->name('templates.update-template-image');
 });

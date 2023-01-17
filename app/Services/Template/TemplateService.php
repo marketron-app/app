@@ -3,8 +3,10 @@
 namespace App\Services\Template;
 
 use App\Http\Requests\Admin\Template\StoreTemplateRequest;
+use App\Http\Requests\Admin\Template\UpdateTemplateImage;
 use App\Jobs\ProcessTemplateImage;
 use App\Models\Template;
+use Illuminate\Support\Facades\Storage;
 use Ramsey\Uuid\Uuid;
 
 class TemplateService
@@ -37,6 +39,20 @@ class TemplateService
         ]);
 
         ProcessTemplateImage::dispatch($template);
+
+        return $template;
+    }
+
+    public function updateTemplateImage(Template $template, UpdateTemplateImage $request): Template
+    {
+        if ($request->hasFile('templateImage')) {
+            $originalImageFileName = Uuid::uuid4().'.png';
+            Storage::disk('s3')->put($originalImageFileName, $request->file('templateImage')->getContent());
+
+            $template->url = $originalImageFileName;
+        }
+
+        $template->save();
 
         return $template;
     }
