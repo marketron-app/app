@@ -28,7 +28,10 @@ import Modal from "@/Components/Modal.vue";
 
             </label>
             <p class="text-sm" v-if="replaceImageForm.templateImage">{{replaceImageForm.templateImage.name}}</p>
-            <button @click="replaceTemplateImage" :disabled="!replaceImageForm.templateImage" type="button" class="w-full mt-3 p-2 font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Save</button>
+            <button @click="replaceTemplateImage" :disabled="!replaceImageForm.templateImage || replaceImageForm.processing" type="button" class=" disabled:opacity-25 disabled:cursor-not-allowed w-full mt-3 p-2 font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                <span v-if="replaceImageForm.processing">Saving...</span>
+                <span v-else>Save</span>
+            </button>
 
         </div>
     </modal>
@@ -124,7 +127,9 @@ export default {
             this.$inertia.post(this.route("admin.templates.unpublish", this.template.id))
         },
         replaceTemplateImage(){
-            this.replaceImageForm.post(this.route("admin.templates.update-template-image", this.template.id))
+            this.replaceImageForm.post(this.route("admin.templates.update-template-image", this.template.id), {
+                onFinish: () => {this.showReplaceTemplateModal = false}
+            })
         },
         setFile(event) {
             this.replaceImageForm.templateImage = event.target.files[0];
