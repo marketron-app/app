@@ -2,7 +2,7 @@
 import {Head} from '@inertiajs/inertia-vue3';
 import AuthenticatedLayout from '@/Layouts/Admin/AuthenticatedLayout.vue';
 import Modal from "@/Components/Modal.vue";
-
+import {format} from "date-fns";
 </script>
 
 <template>
@@ -67,7 +67,7 @@ import Modal from "@/Components/Modal.vue";
 
             </div>
             <div v-else class="p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg max-w-7xl mx-auto flex justify-between items-center" role="alert">
-                <span>This template was published on {{template.publishedAt}}. Users can see it.</span>
+                <span>This template was published on <strong>{{format(new Date(template.publishedAt), 'MM/dd/yyyy (HH:mm)')}}</strong>. Users can see it.</span>
                 <button @click="unpublish" type="button" class="py-2 px-3 text-xs font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">Unpublish</button>
 
             </div>
