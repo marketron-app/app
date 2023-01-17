@@ -28,6 +28,11 @@ class TemplateImageProcessor
         $image->compositeImage($mask, Imagick::COMPOSITE_COPYOPACITY, 0, 0, Imagick::CHANNEL_ALPHA);
 
         $image = $this->resizeImage($image, $template);
+        $rawData = $template->raw_data;
+        $rawData["width"] = $image->getImageWidth();
+        $rawData["height"] = $image->getImageHeight();
+        $template->raw_data = $rawData;
+        $template->save();
         $this->uploadAndDeleteImage($templateImagePath, $image);
 
         return $image;

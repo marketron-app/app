@@ -28,7 +28,7 @@ import {format} from "date-fns";
     <modal :show="showReplaceTemplateModal" @close="() => { showReplaceTemplateModal = false}">
         <div class="m-5 p-5 text-center">
             <h1 class="font-bold text-2xl">Replace current template image with new one</h1>
-            <p class="mb-3">Image must have the same resolution as the current one.</p>
+            <p class="mb-3">Image must have the same resolution as the current one <strong>({{template.rawData.width}}x{{template.rawData.height}})</strong>.</p>
 
             <label for="dropzone-file"
                    class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer">

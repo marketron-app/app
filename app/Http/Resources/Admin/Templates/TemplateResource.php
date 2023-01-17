@@ -28,6 +28,7 @@ class TemplateResource extends JsonResource
             'screenshotWidth' => $this->screenshot_width,
             'screenshotHeight' => $this->screenshot_height,
             'screenshotCoordinates' => $this->coordinates,
+            'rawData' => $this->raw_data,
             'tags' => $this->tags,
         ];
     }
