@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Template\StoreTemplateRequest;
+use App\Http\Requests\Admin\Template\UpdateTemplateImage;
 use App\Http\Resources\Admin\Templates\LiteTemplateResource;
 use App\Http\Resources\Admin\Templates\TemplateResource;
 use App\Models\Template;
@@ -85,13 +86,12 @@ class TemplateController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param UpdateTemplateImage $request
+     * @param Template $template
+     * @return Application|Redirector|RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update(UpdateTemplateImage $request, Template $template)
     {
-        //
     }
 
     /**
@@ -123,5 +123,10 @@ class TemplateController extends Controller
         ]);
 
         return redirect(route('templates.show', ['template' => $template->id]));
+    }
+
+    public function updateTemplateImage(UpdateTemplateImage $request, Template $template){
+        $this->templateService->updateTemplateImage($template, $request);
+        return redirect(route("admin.templates.show", ["template" => $template->id]));
     }
 }
