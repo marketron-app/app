@@ -24,7 +24,7 @@ class UpdateTemplateImage extends FormRequest
     public function rules()
     {
         return [
-            "templateImage" => ["file"]
+            'templateImage' => ['file'],
         ];
     }
 }

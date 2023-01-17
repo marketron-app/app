@@ -45,14 +45,15 @@ class TemplateService
 
     public function updateTemplateImage(Template $template, UpdateTemplateImage $request): Template
     {
-        if($request->hasFile("templateImage")){
+        if ($request->hasFile('templateImage')) {
             $originalImageFileName = Uuid::uuid4().'.png';
-            Storage::disk('s3')->put($originalImageFileName, $request->file("templateImage")->getContent());
+            Storage::disk('s3')->put($originalImageFileName, $request->file('templateImage')->getContent());
 
             $template->url = $originalImageFileName;
         }
 
         $template->save();
+
         return $template;
     }
 }
