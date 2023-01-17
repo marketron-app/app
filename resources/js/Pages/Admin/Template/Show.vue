@@ -39,9 +39,16 @@ import AuthenticatedLayout from '@/Layouts/Admin/AuthenticatedLayout.vue';
                         <template #summary>Media</template>
                         <template #icon>🖼️</template>
                         <div>
-
-                            <p class="text-lg font-bold">Thumbnail image:</p>
-                            <img class="h-auto max-w-xl rounded-lg shadow-md dark:shadow-gray-800" :src="template.thumbnailImage" alt="image description">
+                            <div class="flex">
+                                <div class="w-1/2 p-3">
+                                    <p class="text-lg font-bold">Thumbnail image:</p>
+                                    <img class="h-auto rounded-lg shadow-md dark:shadow-gray-800 w-100" :src="template.thumbnailImage" alt="image description">
+                                </div>
+                                <div class="w-1/2 p-3">
+                                    <p class="text-lg font-bold">Template image:</p>
+                                    <img class="h-auto rounded-lg shadow-md dark:shadow-gray-800 w-100" :src="template.templateUrl" alt="image description">
+                                </div>
+                            </div>
                         </div>
                     </AccordionItem>
                 </AccordionList>
