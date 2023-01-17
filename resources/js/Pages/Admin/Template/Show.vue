@@ -6,6 +6,24 @@ import Modal from "@/Components/Modal.vue";
 </script>
 
 <template>
+    <div id="loading-screen" v-if="isRequesting" class="w-full h-full fixed block top-0 left-0 bg-white opacity-75 z-50 flex justify-center items-center">
+        <div class="m-5 p-5 text-center">
+            <h1 class="font-bold text-2xl">Loading...</h1>
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-10 w-10 flex-1 animate-spin stroke-current stroke-[3] mx-auto mt-5"
+                fill="none"
+                viewBox="0 0 24 24"
+            >
+                <path
+                    d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
+                    class="stroke-current opacity-25"
+                />
+                <path d="M12 2C6.47715 2 2 6.47715 2 12C2 14.7255 3.09032 17.1962 4.85857 19" />
+            </svg>
+        </div>
+    </div>
+
     <Head title="Show template" />
     <modal :show="showReplaceTemplateModal" @close="() => { showReplaceTemplateModal = false}">
         <div class="m-5 p-5 text-center">
@@ -71,6 +89,8 @@ import Modal from "@/Components/Modal.vue";
                                 <div class="w-1/2 p-3">
                                     <p class="text-lg font-bold">Thumbnail image:</p>
                                     <img class="h-auto rounded-lg shadow-md dark:shadow-gray-800 w-100" :src="template.thumbnailImage" alt="image description">
+                                    <button @click="rerenderThumbnail" type="button" class="w-full mt-3 p-2 font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Rerender thumbnail</button>
+
                                 </div>
                                 <div class="w-1/2 p-3">
                                     <p class="text-lg font-bold">Template image:</p>
@@ -105,6 +125,8 @@ import Modal from "@/Components/Modal.vue";
 
 <script>
 import {useForm} from "@inertiajs/inertia-vue3";
+import VueSimpleAlert from "vue3-simple-alert";
+import {Inertia} from "@inertiajs/inertia";
 
 export default {
     name: "Show",
@@ -113,7 +135,8 @@ export default {
           showReplaceTemplateModal: false,
           replaceImageForm: new useForm({
               templateImage: null
-          })
+          }),
+          isRequesting: false
       }
     },
     props: {
@@ -134,6 +157,20 @@ export default {
         setFile(event) {
             this.replaceImageForm.templateImage = event.target.files[0];
         },
+        rerenderThumbnail(){
+            VueSimpleAlert.confirm(
+                "Are you sure you want to replace current thumbnail image?" ,
+                "Thumbnail rerender",
+                "warning"
+            ).then(async () => {
+                Inertia.post(this.route("admin.templates.rerender", this.template.id), {}, {
+                    onStart: () => {this.isRequesting = true},
+                    onFinish: () => {this.isRequesting = false}
+                })
+            }).catch((e) => {
+                this.$toast.error(e);
+            });
+        }
     }
 }
 </script>

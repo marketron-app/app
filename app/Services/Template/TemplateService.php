@@ -6,11 +6,13 @@ use App\Http\Requests\Admin\Template\StoreTemplateRequest;
 use App\Http\Requests\Admin\Template\UpdateTemplateImage;
 use App\Jobs\ProcessTemplateImage;
 use App\Models\Template;
+use App\Services\Image\ImageService;
 use Illuminate\Support\Facades\Storage;
 use Ramsey\Uuid\Uuid;
 
 class TemplateService
 {
+    public function __construct(private ImageService $imageService){}
     public function index($page = 1, $perPage = 20)
     {
         return Template::query()->paginate($perPage, ['*'], 'page', $page);
@@ -55,5 +57,11 @@ class TemplateService
         $template->save();
 
         return $template;
+    }
+
+    public function rerenderThumbnail(Template $template){
+        $preview = $this->imageService->createImage($template->identifier, 'https://www.marketron.app');
+        $template->thumbnail_url = $preview->s3_path;
+        $template->save();
     }
 }

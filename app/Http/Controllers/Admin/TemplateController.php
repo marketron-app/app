@@ -55,7 +55,7 @@ class TemplateController extends Controller
     {
         $template = $this->templateService->storeTemplate($request);
 
-        return redirect(route('templates.index'));
+        return redirect(route('admin.templates.index'));
     }
 
     /**
@@ -103,7 +103,7 @@ class TemplateController extends Controller
     {
         $template->delete();
 
-        return redirect(route('templates.index'));
+        return redirect(route('admin.templates.index'));
     }
 
     public function publish(Template $template)
@@ -112,7 +112,7 @@ class TemplateController extends Controller
             'published_at' => now(),
         ]);
 
-        return redirect(route('templates.show', ['template' => $template->id]));
+        return redirect(route('admin.templates.show', ['template' => $template->id]));
     }
 
     public function unpublish(Template $template)
@@ -121,7 +121,7 @@ class TemplateController extends Controller
             'published_at' => null,
         ]);
 
-        return redirect(route('templates.show', ['template' => $template->id]));
+        return redirect(route('admin.templates.show', ['template' => $template->id]));
     }
 
     public function updateTemplateImage(UpdateTemplateImage $request, Template $template)
@@ -130,4 +130,11 @@ class TemplateController extends Controller
 
         return redirect(route('admin.templates.show', ['template' => $template->id]));
     }
+
+    public function rerenderThumbnail(Template $template){
+        $this->templateService->rerenderThumbnail($template);
+
+        return redirect(route('admin.templates.show', ['template' => $template->id]));
+    }
+
 }
