@@ -21,7 +21,7 @@ RUN apt-get update && apt-get install -y \
     lua-zlib-dev \
     libmemcached-dev \
     nginx \
-    libpng-dev zlib1g-dev php8.1-imagick
+    libpng-dev zlib1g-dev
 
 
 # Install php extensions
