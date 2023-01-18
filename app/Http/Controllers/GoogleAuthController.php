@@ -7,7 +7,9 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Laravel\Socialite\Facades\Socialite;
+use Ramsey\Uuid\Uuid;
 
 class GoogleAuthController extends Controller
 {
@@ -20,15 +22,16 @@ class GoogleAuthController extends Controller
     {
         $user = Socialite::driver('google')->stateless()->user();
         $user = User::query()->updateOrCreate([
-            'provider_id' => $user->id,
-            'provider' => 'google',
+            'email' => $user->email,
         ], [
             'name' => $user->name,
-            'email' => $user->email,
+            'provider_id' => $user->id,
+            'provider' => 'github',
+            'password' => Hash::make(Uuid::uuid4())
         ]);
 
         Auth::login($user);
 
-        return redirect(config('app.url').'/login-redirect?token='.$user->createToken('google')->plainTextToken);
+        return redirect("/");
     }
 }

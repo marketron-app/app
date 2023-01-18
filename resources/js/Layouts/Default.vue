@@ -31,7 +31,11 @@ const mobileMenuOpen = ref(false)
                         <a v-for="item in navigation" :key="item.name" :href="item.href" class="font-semibold text-gray-900 hover:text-gray-900">{{ item.name }}</a>
                     </div>
                     <div class="hidden lg:flex lg:min-w-0 lg:flex-1 lg:justify-end">
-                        <a href="#" class="inline-block rounded-lg px-3 py-1.5 text-sm font-semibold leading-6 text-gray-900 shadow-sm ring-1 ring-gray-900/10 hover:ring-gray-900/20">Log in</a>
+                        <div v-if="$page.props.auth.user !== null">
+                            {{$page.props.auth.user.name}}
+                        </div>
+
+                        <a v-else href="/login" class="inline-block rounded-lg px-3 py-1.5 text-sm font-semibold leading-6 text-gray-900 shadow-sm ring-1 ring-gray-900/10 hover:ring-gray-900/20">Log in</a>
                     </div>
                 </nav>
                 <Dialog as="div" @close="mobileMenuOpen = false" :open="mobileMenuOpen">
@@ -56,7 +60,10 @@ const mobileMenuOpen = ref(false)
                                     <a v-for="item in navigation" :key="item.name" :href="item.href" class="-mx-3 block rounded-lg py-2 px-3 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-400/10">{{ item.name }}</a>
                                 </div>
                                 <div class="py-6">
-                                    <a href="#" class="-mx-3 block rounded-lg py-2.5 px-3 text-base font-semibold leading-6 text-gray-900 hover:bg-gray-400/10">Log in</a>
+                                    <div v-if="$page.props.auth.user !== null">
+                                        {{$page.props.auth.user.name}}
+                                    </div>
+                                    <a v-else href="/login" class="-mx-3 block rounded-lg py-2.5 px-3 text-base font-semibold leading-6 text-gray-900 hover:bg-gray-400/10">Log in</a>
                                 </div>
                             </div>
                         </div>

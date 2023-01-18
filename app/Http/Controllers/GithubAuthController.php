@@ -7,7 +7,9 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Laravel\Socialite\Facades\Socialite;
+use Ramsey\Uuid\Uuid;
 
 class GithubAuthController extends Controller
 {
@@ -20,15 +22,16 @@ class GithubAuthController extends Controller
     {
         $user = Socialite::driver('github')->stateless()->user();
         $user = User::query()->updateOrCreate([
-            'provider_id' => $user->id,
-            'provider' => 'github',
+            'email' => $user->email,
         ], [
             'name' => $user->name,
-            'email' => $user->email,
+            'provider_id' => $user->id,
+            'provider' => 'github',
+            'password' => Hash::make(Uuid::uuid4())
         ]);
 
-        Auth::login($user);
+        Auth::guard("web")->login($user);
 
-        return redirect(config('app.url').'/login-redirect?token='.$user->createToken('github')->plainTextToken);
+        return redirect("/");
     }
 }
