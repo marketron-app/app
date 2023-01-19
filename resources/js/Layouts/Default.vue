@@ -44,7 +44,6 @@ const mobileMenuOpen = ref(false)
                             <div class="flex">
                                 <a href="#" class="-m-1.5 p-1.5">
                                     <span class="sr-only">Marketron</span>
-                                    <img class="h-8" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="" />
                                 </a>
                             </div>
                             <div class="flex">

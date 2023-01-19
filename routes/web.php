@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\GithubAuthController;
+use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\IndexController;
 use Illuminate\Support\Facades\Route;
@@ -15,12 +17,24 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('login', [AuthController::class, 'index'])->name("login");
+Route::middleware("auth")->group(function (){
+    Route::get('/', IndexController::class);
 
-Route::get('/', IndexController::class);
-Route::get('login', [AuthController::class, 'index']);
+    Route::prefix('image')->group(function () {
+        Route::get('', [ImageController::class, 'index'])->name('images.index');
+        Route::post('', [ImageController::class, 'store'])->name('images.store');
+        Route::get('{image}', [ImageController::class, 'show'])->name('images.show');
+    });
+});
 
-Route::prefix('image')->group(function () {
-    Route::get('', [ImageController::class, 'index'])->name('images.index');
-    Route::post('', [ImageController::class, 'store'])->name('images.store');
-    Route::get('{image}', [ImageController::class, 'show'])->name('images.show');
+Route::prefix('auth')->group(function () {
+    Route::prefix('github')->group(function () {
+        Route::get('redirect', [GithubAuthController::class, 'redirect'])->name('github-redirect');
+        Route::get('callback', [GithubAuthController::class, 'callback'])->name('github-callback');
+    });
+    Route::prefix('google')->group(function () {
+        Route::get('redirect', [GoogleAuthController::class, 'redirect'])->name('google-redirect');
+        Route::get('callback', [GoogleAuthController::class, 'callback'])->name('google-callback');
+    });
 });

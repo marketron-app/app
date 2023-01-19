@@ -30,7 +30,7 @@ class GithubAuthController extends Controller
             'password' => Hash::make(Uuid::uuid4())
         ]);
 
-        Auth::guard("web")->login($user);
+        Auth::login($user, true);
 
         return redirect("/");
     }
