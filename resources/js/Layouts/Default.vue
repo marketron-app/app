@@ -2,6 +2,8 @@
 import { ref } from 'vue'
 import { Dialog, DialogPanel } from '@headlessui/vue'
 import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline'
+import Dropdown from "@/Components/Dropdown.vue";
+import DropdownLink from "@/Components/DropdownLink.vue";
 
 const navigation = [
 ]
@@ -10,7 +12,7 @@ const mobileMenuOpen = ref(false)
 </script>
 
 <template>
-    <div class="isolate bg-white">
+    <div class="isolate bg-white relative z-50">
 
         <div class="p-6 lg:px-8">
             <div>
@@ -32,7 +34,38 @@ const mobileMenuOpen = ref(false)
                     </div>
                     <div class="hidden lg:flex lg:min-w-0 lg:flex-1 lg:justify-end">
                         <div v-if="$page.props.auth.user !== null">
-                            {{$page.props.auth.user.name}}
+                            <Dropdown align="right" width="48">
+                                <template #trigger>
+                                        <span class="inline-flex rounded-md">
+                                            <button
+                                                type="button"
+                                                class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150"
+                                            >
+                                                {{ $page.props.auth.user.name }}
+
+                                                <svg
+                                                    class="ml-2 -mr-0.5 h-4 w-4"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    viewBox="0 0 20 20"
+                                                    fill="currentColor"
+                                                >
+                                                    <path
+                                                        fill-rule="evenodd"
+                                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                                        clip-rule="evenodd"
+                                                    />
+                                                </svg>
+                                            </button>
+                                        </span>
+                                </template>
+
+                                <template #content>
+                                    <DropdownLink :href="route('logout')" method="delete" as="button">
+                                        Log Out
+                                    </DropdownLink>
+                                </template>
+                            </Dropdown>
+
                         </div>
 
                         <a v-else href="/login" class="inline-block rounded-lg px-3 py-1.5 text-sm font-semibold leading-6 text-gray-900 shadow-sm ring-1 ring-gray-900/10 hover:ring-gray-900/20">Log in</a>
@@ -44,6 +77,7 @@ const mobileMenuOpen = ref(false)
                             <div class="flex">
                                 <a href="#" class="-m-1.5 p-1.5">
                                     <span class="sr-only">Marketron</span>
+                                    <img class="h-8" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="" />
                                 </a>
                             </div>
                             <div class="flex">

@@ -30,7 +30,7 @@ class GoogleAuthController extends Controller
             'password' => Hash::make(Uuid::uuid4())
         ]);
 
-        Auth::login($user);
+        Auth::login($user, true);
 
         return redirect("/");
     }

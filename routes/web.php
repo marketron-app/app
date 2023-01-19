@@ -18,14 +18,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('login', [AuthController::class, 'index'])->name("login");
-Route::middleware("auth")->group(function (){
-    Route::get('/', IndexController::class);
+Route::get('/', IndexController::class);
 
-    Route::prefix('image')->group(function () {
-        Route::get('', [ImageController::class, 'index'])->name('images.index');
-        Route::post('', [ImageController::class, 'store'])->name('images.store');
-        Route::get('{image}', [ImageController::class, 'show'])->name('images.show');
-    });
+Route::prefix('image')->group(function () {
+    Route::get('', [ImageController::class, 'index'])->name('images.index');
+    Route::post('', [ImageController::class, 'store'])->name('images.store');
+    Route::get('{image}', [ImageController::class, 'show'])->name('images.show');
 });
 
 Route::prefix('auth')->group(function () {
@@ -37,4 +35,5 @@ Route::prefix('auth')->group(function () {
         Route::get('redirect', [GoogleAuthController::class, 'redirect'])->name('google-redirect');
         Route::get('callback', [GoogleAuthController::class, 'callback'])->name('google-callback');
     });
+    Route::delete("logout", [AuthController::class, "logout"])->name("logout");
 });
