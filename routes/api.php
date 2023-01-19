@@ -1,7 +1,5 @@
 <?php
 
-use App\Http\Controllers\GithubAuthController;
-use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\TemplateController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -24,5 +22,3 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::prefix('templates')->group(function () {
     Route::get('', [TemplateController::class, 'index']);
 });
-
-

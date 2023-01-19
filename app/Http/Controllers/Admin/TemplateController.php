@@ -131,10 +131,10 @@ class TemplateController extends Controller
         return redirect(route('admin.templates.show', ['template' => $template->id]));
     }
 
-    public function rerenderThumbnail(Template $template){
+    public function rerenderThumbnail(Template $template)
+    {
         $this->templateService->rerenderThumbnail($template);
 
         return redirect(route('admin.templates.show', ['template' => $template->id]));
     }
-
 }

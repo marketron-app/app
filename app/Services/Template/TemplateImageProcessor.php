@@ -29,8 +29,8 @@ class TemplateImageProcessor
 
         $image = $this->resizeImage($image, $template);
         $rawData = $template->raw_data;
-        $rawData["width"] = $image->getImageWidth();
-        $rawData["height"] = $image->getImageHeight();
+        $rawData['width'] = $image->getImageWidth();
+        $rawData['height'] = $image->getImageHeight();
         $template->raw_data = $rawData;
         $template->save();
         $this->uploadAndDeleteImage($templateImagePath, $image);

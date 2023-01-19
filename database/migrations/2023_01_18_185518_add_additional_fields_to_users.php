@@ -14,8 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string("provider");
-            $table->string("provider_id");
+            $table->string('provider');
+            $table->string('provider_id');
         });
     }
 
@@ -27,7 +27,7 @@ return new class extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn(["provider", "provider_id"]);
+            $table->dropColumn(['provider', 'provider_id']);
         });
     }
 };

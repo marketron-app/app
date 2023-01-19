@@ -12,7 +12,10 @@ use Ramsey\Uuid\Uuid;
 
 class TemplateService
 {
-    public function __construct(private ImageService $imageService){}
+    public function __construct(private ImageService $imageService)
+    {
+    }
+
     public function index($page = 1, $perPage = 20)
     {
         return Template::query()->paginate($perPage, ['*'], 'page', $page);
@@ -59,7 +62,8 @@ class TemplateService
         return $template;
     }
 
-    public function rerenderThumbnail(Template $template){
+    public function rerenderThumbnail(Template $template)
+    {
         $preview = $this->imageService->createImage($template->identifier, 'https://www.marketron.app');
         $template->thumbnail_url = $preview->s3_path;
         $template->save();

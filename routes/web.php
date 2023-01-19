@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('login', [AuthController::class, 'index'])->name("login");
+Route::get('login', [AuthController::class, 'index'])->name('login');
 Route::get('/', IndexController::class);
 
 Route::prefix('image')->group(function () {
@@ -35,5 +35,5 @@ Route::prefix('auth')->group(function () {
         Route::get('redirect', [GoogleAuthController::class, 'redirect'])->name('google-redirect');
         Route::get('callback', [GoogleAuthController::class, 'callback'])->name('google-callback');
     });
-    Route::delete("logout", [AuthController::class, "logout"])->name("logout");
+    Route::delete('logout', [AuthController::class, 'logout'])->name('logout');
 });

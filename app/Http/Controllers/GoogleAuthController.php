@@ -27,11 +27,11 @@ class GoogleAuthController extends Controller
             'name' => $user->name,
             'provider_id' => $user->id,
             'provider' => 'github',
-            'password' => Hash::make(Uuid::uuid4())
+            'password' => Hash::make(Uuid::uuid4()),
         ]);
 
         Auth::login($user, true);
 
-        return redirect("/");
+        return redirect('/');
     }
 }
