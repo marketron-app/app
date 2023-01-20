@@ -4,6 +4,7 @@ namespace App\Services\Image;
 
 use App\Models\Image;
 use App\Models\Template;
+use App\Models\User;
 use App\Services\ImageEngine\GenerateImageRequest;
 use App\Services\ImageEngine\ImageEngineService;
 use Carbon\Carbon;
@@ -30,5 +31,9 @@ class ImageService
             'user_id' => Auth::user()?->getAuthIdentifier(),
             'metadata' => [],
         ]);
+    }
+
+    public function getUserImages(User $user){
+        return Image::query()->where("user_id", $user->id);
     }
 }

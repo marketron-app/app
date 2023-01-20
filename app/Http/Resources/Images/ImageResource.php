@@ -25,6 +25,7 @@ class ImageResource extends JsonResource
             'url' => $this->url,
             'template' => TemplateResource::make($this->template),
             'path' => Storage::disk('s3')->temporaryUrl($this->s3_path, Carbon::now()->addMinutes(10)),
+            'createdAt' => $this->created_at
         ];
     }
 }
