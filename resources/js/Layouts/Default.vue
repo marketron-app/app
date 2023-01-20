@@ -60,6 +60,9 @@ const mobileMenuOpen = ref(false)
                                 </template>
 
                                 <template #content>
+                                    <DropdownLink :href="route('user.images')" method="get" as="button">
+                                        My images
+                                    </DropdownLink>
                                     <DropdownLink :href="route('logout')" method="delete" as="button">
                                         Log Out
                                     </DropdownLink>

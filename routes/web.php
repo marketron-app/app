@@ -5,6 +5,7 @@ use App\Http\Controllers\GithubAuthController;
 use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\IndexController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,4 +37,10 @@ Route::prefix('auth')->group(function () {
         Route::get('callback', [GoogleAuthController::class, 'callback'])->name('google-callback');
     });
     Route::delete('logout', [AuthController::class, 'logout'])->name('logout');
+});
+
+Route::middleware("auth")->group(function (){
+    Route::prefix("user")->group(function (){
+        Route::get("images", [UserController::class, "images"])->name("user.images");
+    });
 });
