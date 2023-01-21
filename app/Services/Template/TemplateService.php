@@ -7,6 +7,7 @@ use App\Http\Requests\Admin\Template\UpdateTemplateImage;
 use App\Jobs\ProcessTemplateImage;
 use App\Models\Template;
 use App\Services\Image\ImageService;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Ramsey\Uuid\Uuid;
 
@@ -23,6 +24,7 @@ class TemplateService
 
     public function storeTemplate(StoreTemplateRequest $request)
     {
+        File::ensureDirectoryExists(storage_path('app/original-images'));
         $originalImageFileName = Uuid::uuid4().'.png';
         $originalImage = $request->file('image')->storeAs('original-images', $originalImageFileName);
         $screenshotCoordinates = $request->validated('screenshotCoordinates');

@@ -1,4 +1,5 @@
 FROM php:8.1-fpm
+ARG NODE_VERSION=16
 
 # Set working directory
 WORKDIR /var/www
@@ -24,6 +25,10 @@ RUN apt-get update && apt-get install -y \
     libpng-dev zlib1g-dev
 
 
+RUN curl -sLS https://deb.nodesource.com/setup_$NODE_VERSION.x | bash - \
+    && apt-get install -y nodejs \
+    && npm install -g npm
+
 # Install php extensions
 RUN chmod +x /usr/local/bin/install-php-extensions && sync && \
     install-php-extensions mbstring pdo_mysql zip exif pcntl gd memcached xml iconv simplexml xmlreader zlib imagick
@@ -48,7 +53,7 @@ RUN useradd -u 1000 -ms /bin/bash -g www www
 COPY --chown=www:www-data . /var/www
 
 # add root to www group
-RUN chmod -R ug+w /var/www/storage
+RUN chmod -R 775 /var/www/storage
 
 # Copy nginx/php/supervisor configs
 RUN cp docker-config/supervisor.conf /etc/supervisord.conf
@@ -65,12 +70,7 @@ COPY ./docker-config/crontab /etc/cron.d/crontab
 # Deployment steps
 RUN composer install --optimize-autoloader --no-dev
 RUN chmod +x /var/www/docker-config/run.sh
-
-RUN apt-get update && apt-get install -y apt-transport-https ca-certificates curl gnupg && \
-    curl -sLf --retry 3 --tlsv1.2 --proto "=https" 'https://packages.doppler.com/public/cli/gpg.DE2A7741A397C129.key' | apt-key add - && \
-    echo "deb https://packages.doppler.com/public/cli/deb/debian any-version main" | tee /etc/apt/sources.list.d/doppler-cli.list && \
-    apt-get update && \
-    apt-get -y install doppler
+RUN npm run build
 
 EXPOSE 80
 ENTRYPOINT ["/var/www/docker-config/run.sh"]
