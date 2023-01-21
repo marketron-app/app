@@ -70,7 +70,7 @@ COPY ./docker-config/crontab /etc/cron.d/crontab
 # Deployment steps
 RUN composer install --optimize-autoloader --no-dev
 RUN chmod +x /var/www/docker-config/run.sh
-RUN npm run build
+RUN npm install && npm run build
 
 EXPOSE 80
 ENTRYPOINT ["/var/www/docker-config/run.sh"]
