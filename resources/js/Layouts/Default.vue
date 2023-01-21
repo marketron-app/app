@@ -1,7 +1,8 @@
 <script setup>
 import { ref } from 'vue'
 import { Dialog, DialogPanel } from '@headlessui/vue'
-import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline'
+import Bars3Icon from '@heroicons/vue/24/outline/Bars3Icon'
+import XMarkIcon from '@heroicons/vue/24/outline/XMarkIcon'
 import Dropdown from "@/Components/Dropdown.vue";
 import DropdownLink from "@/Components/DropdownLink.vue";
 

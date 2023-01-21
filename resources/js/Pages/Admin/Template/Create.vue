@@ -78,23 +78,23 @@ export default {
                                 id="title"
                                 type="text"
                                 class="mt-1 block w-full"
-                                v-model="this.form.title"
+                                v-model="form.title"
                                 required
                                 autofocus
                                 autocomplete="title"
                             />
-                            <InputError class="mt-2" :message="this.form.errors.title" />
+                            <InputError class="mt-2" :message="form.errors.title" />
 
                             <InputLabel for="description" value="Description" class="my-2"/>
                             <textarea
                                 id="description"
                                 type="textarea"
                                 class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                                v-model="this.form.description"
+                                v-model="form.description"
                                 required
                                 autocomplete="title"
                             />
-                            <InputError class="mt-2" :message="this.form.errors.description" />
+                            <InputError class="mt-2" :message="form.errors.description" />
 
 
                             <InputLabel for="keywords" value="Keywords" class="mt-2"/>
@@ -107,7 +107,7 @@ export default {
                                     v-model="currentKeyword"
                                     @keydown.enter.prevent="addKeyword"
                                 />
-                                <PrimaryButton class="ml-4 mt-1 w-1/12 justify-center" :class="{ 'opacity-25': this.form.processing }" type="button" @click.native="addKeyword()">
+                                <PrimaryButton class="ml-4 mt-1 w-1/12 justify-center" :class="{ 'opacity-25': form.processing }" type="button" @click.native="addKeyword()">
                                     <PlusIcon class="w-5 h-5"/>
                                 </PrimaryButton>
                             </div>
@@ -115,10 +115,10 @@ export default {
                                 <span v-for="(keyword, index) in keywords" :key="index" class="cursor-pointer bg-blue-100 text-blue-800 text-m font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800" @click="removeKeyword(index)">{{ keyword }}</span>
 
                             </div>
-                            <InputError class="mt-2" :message="this.form.errors.keywords" />
+                            <InputError class="mt-2" :message="form.errors.keywords" />
 
                             <InputLabel for="image" value="Image" class="mt-5"/>
-                            <ImageCoordinatePicker class="w-full" @finished="this.savePoints" @saveimage="this.saveImage"/>
+                            <ImageCoordinatePicker class="w-full" @finished="savePoints" @saveimage="saveImage"/>
 
                             <div class="flex">
                                 <div class="w-1/2 pr-2">
@@ -127,10 +127,10 @@ export default {
                                         id="screenshotWidth"
                                         type="number"
                                         class="mt-1 block w-full"
-                                        v-model="this.form.screenshotWidth"
+                                        v-model="form.screenshotWidth"
                                         required
                                     />
-                                    <InputError class="mt-2" :message="this.form.errors.screenshotWidth" />
+                                    <InputError class="mt-2" :message="form.errors.screenshotWidth" />
                                 </div>
 
                                 <div class="w-1/2 pl-2">
@@ -139,9 +139,9 @@ export default {
                                         id="screenshotHeight"
                                         type="number"
                                         class="mt-1 block w-full"
-                                        v-model="this.form.screenshotHeight"
+                                        v-model="form.screenshotHeight"
                                     />
-                                    <InputError class="mt-2" :message="this.form.errors.screenshotHeight" />
+                                    <InputError class="mt-2" :message="form.errors.screenshotHeight" />
                                 </div>
                             </div>
 
