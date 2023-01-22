@@ -33,7 +33,8 @@ class ImageService
         ]);
     }
 
-    public function getUserImages(User $user){
-        return Image::query()->where("user_id", $user->id);
+    public function getUserImages(User $user)
+    {
+        return Image::query()->where('user_id', $user->id);
     }
 }

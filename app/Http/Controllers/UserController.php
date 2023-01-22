@@ -10,14 +10,16 @@ use Inertia\Inertia;
 
 class UserController extends Controller
 {
-    public function __construct(private ImageService $imageService){
-
+    public function __construct(private ImageService $imageService)
+    {
     }
-    public function images(Request $request){
 
+    public function images(Request $request)
+    {
         $images = $this->imageService->getUserImages(Auth::user())->paginate();
-        return Inertia::render("MyImages/Index", [
-            "images" => ImageResource::collection($images)
+
+        return Inertia::render('MyImages/Index', [
+            'images' => ImageResource::collection($images),
         ]);
     }
 }

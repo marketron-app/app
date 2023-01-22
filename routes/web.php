@@ -39,8 +39,8 @@ Route::prefix('auth')->group(function () {
     Route::delete('logout', [AuthController::class, 'logout'])->name('logout');
 });
 
-Route::middleware("auth")->group(function (){
-    Route::prefix("user")->group(function (){
-        Route::get("images", [UserController::class, "images"])->name("user.images");
+Route::middleware('auth')->group(function () {
+    Route::prefix('user')->group(function () {
+        Route::get('images', [UserController::class, 'images'])->name('user.images');
     });
 });
