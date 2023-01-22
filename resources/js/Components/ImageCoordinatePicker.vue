@@ -96,6 +96,10 @@ export default {
             pointsCanvasCtx: null,
             pointsToClear: [],
             screenshotPoints: [],
+            isHoveringPoint: false,
+            mousePrevX: 0,
+            mousePrevY: 0,
+            isHoldingDownMouse: false
         }
     },
     mounted() {
@@ -104,7 +108,7 @@ export default {
         this.pointsCanvas.addEventListener("click", this.onCanvasClick)
         this.pointsCanvas.addEventListener("mousedown", this.handleMouseDown)
         this.pointsCanvas.addEventListener("mousemove", this.handleMouseMove)
-        this.pointsCanvas.addEventListener("mouseup", this.handleMouseUp)
+        this.pointsCanvas.addEventListener("mouseup", () => this.isHoldingDownMouse = false)
 
         this.canvasCtx = this.canvas.getContext("2d")
         this.pointsCanvasCtx = this.pointsCanvas.getContext("2d")
@@ -163,7 +167,7 @@ export default {
 
         },
         onCanvasClick(e) {
-            if (this.mouseIsDown) {
+            if (this.isHoveringPoints) {
                 return;
             }
 
@@ -208,27 +212,41 @@ export default {
         },
 
         handleMouseMove(e) {
-
             const mouseX = parseInt(e.clientX - this.pointsCanvas.getBoundingClientRect().left);
             const mouseY = parseInt(e.clientY - this.pointsCanvas.getBoundingClientRect().top);
 
-
-            let isHoveringPoints = false;
+            this.isHoveringPoints = false;
             for (let i = 0; i < this.points.length; i++) {
                 const point = this.points[i];
 
                 if (this.pointsCanvasCtx.isPointInPath(point.path, mouseX, mouseY)) {
-                    isHoveringPoints = true
+                    this.isHoveringPoints = true
+                    if(this.isHoldingDownMouse){
+                        const x = mouseX - this.mousePrevX;
+                        const y = mouseY - this.mousePrevY;
+                        const path = new Path2D()
+                        path.rect(x - point.width / 2, y - point.height / 2, point.width, point.height)
+                        this.points[i].x = x
+                        this.points[i].y = y
+                        this.points[i].path = path
+                    }
                 }
             }
 
-            if(isHoveringPoints){
+            if(this.isHoveringPoints){
                 document.body.style.cursor = 'pointer';
             }else{
                 document.body.style.cursor = 'unset';
             }
+
+        },
+
+        handleMouseDown(e){
+            this.isHoldingDownMouse = true
+
         }
-    }
+    },
+
 }
 </script>
 
