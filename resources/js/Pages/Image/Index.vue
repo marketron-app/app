@@ -1,5 +1,6 @@
 <script setup>
 
+import PrimaryButton from "@/Shared/PrimaryButton.vue";
 </script>
 <template>
 <default-layout>
@@ -37,7 +38,7 @@
                                     autofocus
                                     autocomplete="url"
                                 />
-                                <button :disabled="!canSendRequest" class="ml-1 mt-1 inline-flex w-2/12 items-center justify-center rounded-md border border-transparent bg-indigo-600 px-5 py-3 text-base font-medium text-white hover:bg-indigo-700 disabled:opacity-25 disabled:cursor-not-allowed" type="submit">Generate</button>
+                                <primary-button :disabled="!canSendRequest" :is-loading="showLoadingModal" type="submit" class="ml-1 mt-1 inline-flex w-2/12 items-center font-medium" variation="primary">Generate</primary-button>
                             </div>
                         </div>
                     </div>
