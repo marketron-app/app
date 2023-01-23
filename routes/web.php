@@ -7,6 +7,7 @@ use App\Http\Controllers\ImageController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +19,14 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('local/temp/{path}', function (string $path){
+    if (! \request()->hasValidSignature()) {
+        abort(401);
+    }
+    return Storage::disk('local')->download($path);
+})->name('local.temp');
+
 Route::get('login', [AuthController::class, 'index'])->name('login');
 Route::get('/', IndexController::class);
 
