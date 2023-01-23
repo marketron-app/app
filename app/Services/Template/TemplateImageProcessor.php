@@ -14,9 +14,10 @@ class TemplateImageProcessor
     /**
      * @throws \ImagickException
      */
-    public function cutoutImage(string $rawImagePath, array $coordinates, string $templateImagePath, \App\Models\Template $template)
+    public function cutoutImage(string $fileContents, array $coordinates, string $templateImagePath, \App\Models\Template $template)
     {
-        $image = new Imagick($rawImagePath);
+        $image = new Imagick();
+        $image->readImageBlob($fileContents);
 
         if ($image->getImageAlphaChannel() == Imagick::ALPHACHANNEL_UNDEFINED) {
             $image->setImageAlphaChannel(Imagick::ALPHACHANNEL_TRANSPARENT);
@@ -59,7 +60,7 @@ class TemplateImageProcessor
 
     public function uploadAndDeleteImage(string $templateImagePath, Imagick $imagick): void
     {
-        Storage::disk('s3')->put($templateImagePath, $imagick);
+        Storage::put($templateImagePath, $imagick);
     }
 
     public function generateMask(array $coordinates, int $width, int $height): Imagick

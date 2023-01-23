@@ -10,7 +10,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use Ramsey\Uuid\Uuid;
 
 class ProcessTemplateImage implements ShouldQueue
@@ -36,14 +36,13 @@ class ProcessTemplateImage implements ShouldQueue
      */
     public function handle(TemplateImageProcessor $imageProcessor, ImageService $imageService)
     {
-        File::ensureDirectoryExists(storage_path('app/cutout-images'));
         $template = $this->template;
 
         $newImagePath = Uuid::uuid4().'.png';
         $coordinates = $template->raw_data['cutoutCoordinates'];
 
-        $imagePath = storage_path('app/'.$template->original_image);
-        $img = $imageProcessor->cutoutImage($imagePath, $coordinates, $newImagePath, $this->template);
+        $contents = Storage::get($template->original_image);
+        $img = $imageProcessor->cutoutImage($contents, $coordinates, $newImagePath, $this->template);
 
         $this->template->url = $newImagePath;
         $this->template->save();

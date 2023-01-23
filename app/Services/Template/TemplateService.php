@@ -26,7 +26,7 @@ class TemplateService
     {
         File::ensureDirectoryExists(storage_path('app/original-images'));
         $originalImageFileName = Uuid::uuid4().'.png';
-        $originalImage = $request->file('image')->storeAs('original-images', $originalImageFileName);
+        $originalImage = Storage::putFileAs('original-images', $request->file('image')->path(), $originalImageFileName);
         $screenshotCoordinates = $request->validated('screenshotCoordinates');
         $template = Template::query()->create([
             'identifier' => $request->validated('identifier'),
