@@ -65,7 +65,7 @@ with [your settings](#environmental-variables).
 
 After that, run the following Artisan commands to migrate and populate your database:
 ```bash
-php artisan migrte --seed
+php artisan migrate --seed
 ```
 
 ### Environmental variables

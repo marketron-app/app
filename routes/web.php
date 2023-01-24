@@ -20,10 +20,11 @@ use Illuminate\Support\Facades\Storage;
 |
 */
 
-Route::get('local/temp/{path}', function (string $path){
+Route::get('local/temp/{path}', function (string $path) {
     if (! \request()->hasValidSignature()) {
         abort(401);
     }
+
     return Storage::disk('local')->download($path);
 })->name('local.temp');
 
