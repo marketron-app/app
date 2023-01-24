@@ -33,10 +33,11 @@
   <a href="https://github.com/marketron-app/app">
     <img src="public/images/marketron-cropped.png" alt="Logo" height="50">
   </a>
-<h3 align="center">Marketron API</h3>
+<h3 align="center">Marketronxw</h3>
 
   <p align="center">
-   This is API service for Marketron website. It heavily utilises <a href="https://github.com/marketron-app/image-engine">Marketron Image Engine</a>
+   This is application is a main entry point for Marketron application. It handles user management, template management
+with template editor and admin dashboard.
     <br />
     
   </p>
@@ -59,6 +60,16 @@ The quickest way to setup the project is using docker-compose.
 docker-compose up -d --build
 ```
 
+Once you set up the environment with Docker compose, first create .env file (`cp .env.example .env`) and replace values
+with [your settings](#environmental-variables). 
+
+After that, run the following Artisan commands to migrate and populate your database:
+```bash
+php artisan migrte --seed
+```
+
+### Environmental variables
+ TODO
 
 
 
