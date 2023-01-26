@@ -32,17 +32,17 @@ import {format} from "date-fns";
                                 <tr class="bg-white border-b " v-for="image in images.data" :key="image.id">
                                     <th scope="row" class="py-4 px-6">
                                         <a :href="image.url" target="_blank">
-                                            {{image.url}}
+                                            {{image?.url}}
                                         </a>
                                     </th>
                                     <th scope="row" class="py-4 px-6">
-                                        {{image.template.identifier}}
+                                        {{image.template?.identifier}}
                                     </th>
                                     <td class="py-4 px-6 font-medium whitespace-nowrap">
                                         {{format(new Date(image.createdAt), 'MM/dd/yyyy (HH:mm)')}}
                                     </td>
                                     <td>
-                                        <a :href="'/image/' + image.id" target="_blank" class=" cursor-pointer">
+                                        <a :href="'/image/' + image?.id" target="_blank" class=" cursor-pointer">
                                             <ArrowRightIcon class="h-5 w-5"/>
                                         </a>
                                     </td>
