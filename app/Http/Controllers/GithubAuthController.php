@@ -32,6 +32,8 @@ class GithubAuthController extends Controller
 
         Auth::login($user, true);
 
+        if($user->is_admin)
+            return redirect('/admin');
         return redirect('/');
     }
 }
