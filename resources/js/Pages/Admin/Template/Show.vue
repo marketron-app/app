@@ -85,7 +85,7 @@ import {format} from "date-fns";
                         <template #summary>Media</template>
                         <template #icon>🖼️</template>
                         <div>
-                            <div class="flex" v-if="template.thumbnailImage && this.templateUrl">
+                            <div class="flex" v-if="template.thumbnailImage && template.templateUrl">
                                 <div class="w-1/2 p-3">
                                     <p class="text-lg font-bold">Thumbnail image:</p>
                                     <img class="h-auto rounded-lg shadow-md dark:shadow-gray-800 w-100" :src="template.thumbnailImage" alt="image description">
