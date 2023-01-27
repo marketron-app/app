@@ -37,4 +37,8 @@ class Template extends Model
     {
         $query->whereNotNull('published_at');
     }
+
+    public function processingEvents(){
+        return $this->hasMany(TemplateProcessingEvent::class);
+    }
 }
