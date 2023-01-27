@@ -15,9 +15,9 @@ class TemplateProcessingEventResource extends JsonResource
     public function toArray($request)
     {
         return [
-            "createdAt" => $this->created_at,
-            "message" => $this->message,
-            "status" => $this->status
+            'createdAt' => $this->created_at,
+            'message' => $this->message,
+            'status' => $this->status,
         ];
     }
 }

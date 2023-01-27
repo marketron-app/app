@@ -24,14 +24,14 @@ class TemplateResource extends JsonResource
             'title' => $this->title,
             'identifier' => $this->identifier,
             'thumbnailImage' => $this->thumbnail_url ? Storage::disk('s3')->temporaryUrl($this->thumbnail_url, Carbon::now()->addMinutes(10)) : null,
-            'templateUrl' => $this->url ? Storage::disk('s3')->temporaryUrl($this->url, Carbon::now()->addMinutes(10)) : null ,
+            'templateUrl' => $this->url ? Storage::disk('s3')->temporaryUrl($this->url, Carbon::now()->addMinutes(10)) : null,
             'publishedAt' => $this->published_at,
             'screenshotWidth' => $this->screenshot_width,
             'screenshotHeight' => $this->screenshot_height,
             'screenshotCoordinates' => $this->coordinates,
             'rawData' => $this->raw_data,
             'tags' => $this->tags,
-            "events" => TemplateProcessingEventResource::collection($this->processingEvents)
+            'events' => TemplateProcessingEventResource::collection($this->processingEvents),
         ];
     }
 }

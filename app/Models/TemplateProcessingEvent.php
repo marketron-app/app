@@ -8,13 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class TemplateProcessingEvent extends Model
 {
     use HasFactory;
+
     public const UPDATED_AT = null;
 
     protected $casts = [
-        "metadata" => "json"
+        'metadata' => 'json',
     ];
+
     protected $guarded = [];
-    public function template(){
+
+    public function template()
+    {
         return $this->belongsTo(Template::class);
     }
 }

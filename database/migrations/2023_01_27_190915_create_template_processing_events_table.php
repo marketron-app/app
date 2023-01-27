@@ -17,10 +17,10 @@ return new class extends Migration
         Schema::create('template_processing_events', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Template::class)->constrained();
-            $table->mediumText("message");
-            $table->string("status");
-            $table->json("metadata")->nullable();
-            $table->timestamp("created_at");
+            $table->mediumText('message');
+            $table->string('status');
+            $table->json('metadata')->nullable();
+            $table->timestamp('created_at');
         });
     }
 
