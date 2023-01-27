@@ -85,7 +85,7 @@ import {format} from "date-fns";
                         <template #summary>Media</template>
                         <template #icon>🖼️</template>
                         <div>
-                            <div class="flex">
+                            <div class="flex" v-if="template.thumbnailImage && this.templateUrl">
                                 <div class="w-1/2 p-3">
                                     <p class="text-lg font-bold">Thumbnail image:</p>
                                     <img class="h-auto rounded-lg shadow-md dark:shadow-gray-800 w-100" :src="template.thumbnailImage" alt="image description">
@@ -97,6 +97,9 @@ import {format} from "date-fns";
                                     <img class="h-auto rounded-lg shadow-md dark:shadow-gray-800 w-100 background-rectangles" :src="template.templateUrl" alt="image description">
                                     <button @click="showReplaceTemplateModal = true" type="button" class="w-full mt-3 p-2 font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Replace</button>
                                 </div>
+                            </div>
+                            <div v-else>
+                                <p>Template is currently processing. Check events below for more information.</p>
                             </div>
                         </div>
                     </AccordionItem>
