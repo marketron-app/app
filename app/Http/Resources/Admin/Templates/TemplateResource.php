@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Admin\Templates;
 
+use App\Http\Resources\Admin\Template\TemplateProcessingEventResource;
 use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Storage;
@@ -30,6 +31,7 @@ class TemplateResource extends JsonResource
             'screenshotCoordinates' => $this->coordinates,
             'rawData' => $this->raw_data,
             'tags' => $this->tags,
+            "events" => TemplateProcessingEventResource::collection($this->processingEvents)
         ];
     }
 }

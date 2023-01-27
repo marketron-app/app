@@ -119,6 +119,48 @@ import {format} from "date-fns";
                     </AccordionItem>
                 </AccordionList>
 
+                <hr class="my-3">
+
+                <AccordionList>
+                    <AccordionItem>
+                        <template #summary>Processing events</template>
+                        <template #icon>️⏏️</template>
+                        <div>
+                            <table class="w-full text-sm text-left">
+                                <thead class="text-xs  uppercase">
+                                <tr>
+                                    <th scope="col" class="py-3 px-6">
+                                        Time
+                                    </th>
+                                    <th scope="col" class="py-3 px-6">
+                                        Status
+                                    </th>
+                                    <th scope="col" class="py-3 px-6">
+                                        Message
+                                    </th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr class="bg-white border-b " v-for="event in template.events" :key="event.id">
+                                    <th scope="row" class="py-4 px-6">
+                                        {{format(new Date(event.createdAt), 'MM/dd/yyyy (HH:mm:ss)')}}
+                                    </th>
+                                    <th scope="row" class="py-4 px-6">
+                                        <span :class="event.status">{{event.status}}</span>
+                                    </th>
+                                    <th scope="row" class="py-4 px-6">
+                                        <span>{{event.message}}</span>
+                                    </th>
+
+                                </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </AccordionItem>
+                </AccordionList>
+
 
             </div>
             </div>
@@ -185,5 +227,13 @@ export default {
     background-image:  repeating-linear-gradient(45deg, #7c7c7c 25%, transparent 25%, transparent 75%, #7c7c7c 75%, #7c7c7c), repeating-linear-gradient(45deg, #7c7c7c 25%, #e5e5f7 25%, #e5e5f7 75%, #7c7c7c 75%, #7c7c7c);
     background-position: 0 0, 10px 10px;
     background-size: 20px 20px;
+}
+
+.success{
+    color: green
+}
+
+.error{
+    color: red;
 }
 </style>
