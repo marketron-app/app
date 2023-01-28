@@ -67,6 +67,7 @@ class ProcessTemplateImage implements ShouldQueue
             $this->addProcessingEvent('Template finished processing', self::STATUS_SUCCESS);
         } catch (\Exception $exception) {
             $this->addProcessingEvent('Error: '.$exception->getMessage(), self::STATUS_ERROR);
+            throw $exception;
         }
     }
 
