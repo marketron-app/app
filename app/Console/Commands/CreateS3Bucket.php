@@ -37,7 +37,11 @@ class CreateS3Bucket extends Command
         $bucketName = 'marketron-export-'.Str::random(8);
         if (file_exists($path = $this->envPath()) === false) {
             $this->error('Missing .env file. Aborting...');
+            return;
+        }
 
+        if(!$this->validateAwsCredentials()){
+            $this->error("You must set AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY variables.");
             return;
         }
 
@@ -78,12 +82,12 @@ class CreateS3Bucket extends Command
 
     private function setToConfig($bucketName)
     {
-        Config::set('s3.bucket', $bucketName);
+        Config::set('filesystems.disks.s3.bucket', $bucketName);
     }
 
     private function validateAwsCredentials()
     {
-        // TODO
+        return Config::get("filesystems.disks.s3.key") && Config::get("filesystems.disks.s3.secret");
     }
 
     private function createBucket($bucketName, $isPrivate)
