@@ -33,7 +33,7 @@ import PrimaryButton from "@/Shared/PrimaryButton.vue";
                                     id="url"
                                     type="text"
                                     class="mt-1 block w-10/12"
-                                    v-model="this.form.url"
+                                    v-model="form.url"
                                     required
                                     autofocus
                                     autocomplete="url"
