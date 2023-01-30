@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use Aws\S3\S3Client;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Str;
@@ -34,7 +35,8 @@ class CreateS3Bucket extends Command
      */
     public function handle()
     {
-        $bucketName = 'marketron-export-'.Str::random(8);
+        $bucketName = 'marketron-export-' . strtolower(Str::random(12));
+        $isPrivate = $this->option("private");
         if (file_exists($path = $this->envPath()) === false) {
             $this->error('Missing .env file. Aborting...');
             return;
@@ -46,6 +48,7 @@ class CreateS3Bucket extends Command
         }
 
         if (Str::contains(file_get_contents($path), self::BUCKET_ENV_VARIABLE_NAME) === false) {
+            $this->createBucket($bucketName, $isPrivate);
             file_put_contents($path, PHP_EOL.self::BUCKET_ENV_VARIABLE_NAME.'='.$bucketName.PHP_EOL, FILE_APPEND);
         } else {
             if (! $this->askForConfirmation()) {
@@ -53,7 +56,7 @@ class CreateS3Bucket extends Command
 
                 return;
             }
-
+            $this->createBucket($bucketName, $isPrivate);
             // update existing entry
             file_put_contents($path, preg_replace(
                 '/('.self::BUCKET_ENV_VARIABLE_NAME.'=.*)+/',
@@ -92,6 +95,20 @@ class CreateS3Bucket extends Command
 
     private function createBucket($bucketName, $isPrivate)
     {
-        // TODO
+        $acl = $isPrivate ? "private" : "public-read";
+        $s3Client = new S3Client([
+            "region" => Config::get("filesystems.disks.s3.region"),
+            "version" => "2006-03-01",
+            "credentials" => [
+                "key" => Config::get("filesystems.disks.s3.key"),
+                "secret" => Config::get("filesystems.disks.s3.secret")
+            ]
+        ]);
+
+        return $s3Client->createBucket([
+            "Bucket" => $bucketName,
+            "ACL" => $acl
+        ]);
+
     }
 }
