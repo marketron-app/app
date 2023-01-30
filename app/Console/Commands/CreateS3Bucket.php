@@ -35,15 +35,17 @@ class CreateS3Bucket extends Command
      */
     public function handle()
     {
-        $bucketName = 'marketron-export-' . strtolower(Str::random(12));
-        $isPrivate = $this->option("private");
+        $bucketName = 'marketron-export-'.strtolower(Str::random(12));
+        $isPrivate = $this->option('private');
         if (file_exists($path = $this->envPath()) === false) {
             $this->error('Missing .env file. Aborting...');
+
             return;
         }
 
-        if(!$this->validateAwsCredentials()){
-            $this->error("You must set AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY variables.");
+        if (! $this->validateAwsCredentials()) {
+            $this->error('You must set AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY variables.');
+
             return;
         }
 
@@ -90,25 +92,24 @@ class CreateS3Bucket extends Command
 
     private function validateAwsCredentials()
     {
-        return Config::get("filesystems.disks.s3.key") && Config::get("filesystems.disks.s3.secret");
+        return Config::get('filesystems.disks.s3.key') && Config::get('filesystems.disks.s3.secret');
     }
 
     private function createBucket($bucketName, $isPrivate)
     {
-        $acl = $isPrivate ? "private" : "public-read";
+        $acl = $isPrivate ? 'private' : 'public-read';
         $s3Client = new S3Client([
-            "region" => Config::get("filesystems.disks.s3.region"),
-            "version" => "2006-03-01",
-            "credentials" => [
-                "key" => Config::get("filesystems.disks.s3.key"),
-                "secret" => Config::get("filesystems.disks.s3.secret")
-            ]
+            'region' => Config::get('filesystems.disks.s3.region'),
+            'version' => '2006-03-01',
+            'credentials' => [
+                'key' => Config::get('filesystems.disks.s3.key'),
+                'secret' => Config::get('filesystems.disks.s3.secret'),
+            ],
         ]);
 
         return $s3Client->createBucket([
-            "Bucket" => $bucketName,
-            "ACL" => $acl
+            'Bucket' => $bucketName,
+            'ACL' => $acl,
         ]);
-
     }
 }
