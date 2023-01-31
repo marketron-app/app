@@ -42,4 +42,12 @@ class Template extends Model
     {
         return $this->hasMany(TemplateProcessingEvent::class);
     }
+
+    public static function boot()
+    {
+        parent::boot();
+        static::deleting(function($template){
+            $template->processingEvents()->delete();
+        });
+    }
 }
