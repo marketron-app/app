@@ -26,6 +26,7 @@
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^6.1",
         "nunomaduro/phpinsights": "^2.6",
+        "pestphp/pest": "^1.22",
         "phpstan/phpstan": "^1.9",
         "phpunit/phpunit": "^9.5.10",
         "spatie/laravel-ignition": "^1.0"
