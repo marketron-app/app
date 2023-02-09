@@ -36,6 +36,6 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           push: true
-          tags: marketron-production:${{ env.TAG }}
+          tags: registry.digitalocean.com/marketron-production:${{ env.TAG }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
