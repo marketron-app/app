@@ -16,7 +16,7 @@ jobs:
           TAG=${{  github.ref_name }}
           echo "TAG=$TAG" >> "$GITHUB_ENV"
       - name: Build image
-        run: docker build -t marketron-production .
+        run: docker build -t marketron-app .
       - name: Install doctl
         uses: digitalocean/action-doctl@v2
         with:
@@ -24,7 +24,7 @@ jobs:
       - name: Log in to DO Container Registry
         run: doctl registry login --expiry-seconds 600
       - name: Tag image
-        run: docker tag marketron-production \
-          registry.digitalocean.com/marketron-production:${{ env.TAG }}
+        run: docker tag marketron-app \
+          registry.digitalocean.com/marketron-production/maprketron-app:${{ env.TAG }}
       - name: Push image to DO Container Registry
-        run: docker push registry.digitalocean.com/marketron-production:${{ env.TAG }}
+        run: docker push registry.digitalocean.com/marketron-production/marketron-app:${{ env.TAG }}
