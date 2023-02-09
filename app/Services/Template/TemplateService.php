@@ -4,6 +4,7 @@ namespace App\Services\Template;
 
 use App\Http\Requests\Admin\Template\StoreTemplateRequest;
 use App\Http\Requests\Admin\Template\UpdateTemplateImage;
+use App\Http\Requests\Admin\Template\UpdateThumbnailImage;
 use App\Jobs\ProcessTemplateImage;
 use App\Models\Template;
 use App\Services\Image\ImageService;
@@ -54,9 +55,22 @@ class TemplateService
     {
         if ($request->hasFile('templateImage')) {
             $originalImageFileName = Uuid::uuid4().'.png';
-            Storage::disk('s3')->put($originalImageFileName, $request->file('templateImage')->getContent());
+            Storage::put($originalImageFileName, $request->file('templateImage')->getContent());
 
             $template->url = $originalImageFileName;
+        }
+
+        $template->save();
+
+        return $template;
+    }
+    public function updateThumbnailImage(Template $template, UpdateThumbnailImage $request): Template
+    {
+        if ($request->hasFile('thumbnailImage')) {
+            $originalImageFileName = Uuid::uuid4().'.png';
+            Storage::put($originalImageFileName, $request->file('thumbnailImage')->getContent());
+
+            $template->thumbnail_url = $originalImageFileName;
         }
 
         $template->save();

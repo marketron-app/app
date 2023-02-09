@@ -16,5 +16,6 @@ Route::group(['middleware' => IsAdminMiddleware::class], function () {
     Route::post('templates/{template}/publish', [TemplateController::class, 'publish'])->name('templates.publish');
     Route::post('templates/{template}/unpublish', [TemplateController::class, 'unpublish'])->name('templates.unpublish');
     Route::post('templates/{template}/update-template-image', [TemplateController::class, 'updateTemplateImage'])->name('templates.update-template-image');
+    Route::post('templates/{template}/update-thumbnail-image', [TemplateController::class, 'updateThumbnailImage'])->name('templates.update-thumbnail-image');
     Route::post('templates/{template}/rerender', [TemplateController::class, 'rerenderThumbnail'])->name('templates.rerender');
 });

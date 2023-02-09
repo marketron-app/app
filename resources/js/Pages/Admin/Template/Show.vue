@@ -53,6 +53,33 @@ import {format} from "date-fns";
 
         </div>
     </modal>
+    <modal :show="showReplaceThumbnailModal" @close="() => { showReplaceThumbnailModal = false}">
+        <div class="m-5 p-5 text-center">
+            <h1 class="font-bold text-2xl">Replace current template thumbnail with new one</h1>
+
+            <label for="dropzone-file"
+                   class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer">
+                <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                    <svg aria-hidden="true" class="w-10 h-10 mb-3 text-gray-400" fill="none"
+                         stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                    </svg>
+                    <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span>
+                        or drag and drop</p>
+                    <p class="text-xs text-gray-500 dark:text-gray-400">PNG or JPG</p>
+                </div>
+                <input @change="setNewThumbnailFile" id="dropzone-file" type="file" class="hidden" accept="image/*"/>
+
+            </label>
+            <p class="text-sm" v-if="replaceThumbnailForm.thumbnailImage">{{replaceThumbnailForm.thumbnailImage.name}}</p>
+            <button @click="replaceThumbnailImage" :disabled="!replaceThumbnailForm.thumbnailImage || replaceThumbnailForm.processing" type="button" class=" disabled:opacity-25 disabled:cursor-not-allowed w-full mt-3 p-2 font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                <span v-if="replaceThumbnailForm.processing">Saving...</span>
+                <span v-else>Save</span>
+            </button>
+
+        </div>
+    </modal>
 
     <AuthenticatedLayout>
         <template #header>
@@ -89,7 +116,12 @@ import {format} from "date-fns";
                                 <div class="w-1/2 p-3">
                                     <p class="text-lg font-bold">Thumbnail image:</p>
                                     <img class="h-auto rounded-lg shadow-md dark:shadow-gray-800 w-100" :src="template.thumbnailImage" alt="image description">
-                                    <button @click="rerenderThumbnail" type="button" class="w-full mt-3 p-2 font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Rerender thumbnail</button>
+                                    <div class="w-3/4 inline-block pr-1">
+                                        <button @click="rerenderThumbnail" type="button" class="w-full mt-3 p-2 font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Rerender thumbnail</button>
+                                    </div>
+                                    <div class="w-1/4 inline-block pl-1">
+                                        <button @click="showReplaceThumbnailModal = true" type="button" class="w-full mt-3 p-2 font-medium text-center text-white bg-green-600 rounded-lg hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-green-500 dark:hover:bg-green-600 dark:focus:ring-green-700">New thumbnail</button>
+                                    </div>
 
                                 </div>
                                 <div class="w-1/2 p-3">
@@ -178,8 +210,12 @@ export default {
     data(){
       return {
           showReplaceTemplateModal: false,
+          showReplaceThumbnailModal: false,
           replaceImageForm: new useForm({
               templateImage: null
+          }),
+          replaceThumbnailForm: new useForm({
+              thumbnailImage: null
           }),
           isRequesting: false
       }
@@ -199,8 +235,16 @@ export default {
                 onFinish: () => {this.showReplaceTemplateModal = false}
             })
         },
+        replaceThumbnailImage(){
+            this.replaceThumbnailForm.post(this.route("admin.templates.update-thumbnail-image", this.template.id), {
+                onFinish: () => {this.showReplaceThumbnailModal = false}
+            })
+        },
         setFile(event) {
             this.replaceImageForm.templateImage = event.target.files[0];
+        },
+        setNewThumbnailFile(event) {
+            this.replaceThumbnailForm.thumbnailImage = event.target.files[0];
         },
         rerenderThumbnail(){
             VueSimpleAlert.confirm(
