@@ -33,7 +33,7 @@ import DefaultLayout from "@/Layouts/Default.vue";
         </div>
 
         <div class="bg-white">
-            <div class="mx-auto max-w-2xl py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
+            <div class="mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
                 <h2 class="text-2xl font-bold tracking-tight text-gray-900">Some of our templates</h2>
 
                 <div class="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
@@ -58,6 +58,18 @@ import DefaultLayout from "@/Layouts/Default.vue";
             </div>
         </div>
     </default-layout>
+    <div class="bg-gray-50">
+        <div class="mx-auto max-w-7xl py-12 px-6 lg:flex lg:items-center lg:justify-between lg:py-16 lg:px-8">
+            <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+                <span class="block">Ready to generate your first image?</span>
+            </h2>
+            <div class="mt-8 flex lg:mt-0 lg:flex-shrink-0">
+                <div class="inline-flex rounded-md shadow">
+                    <a href="/image" class="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-5 py-3 text-base font-medium text-white hover:bg-indigo-700">Get started</a>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </template>
 

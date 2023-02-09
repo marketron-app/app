@@ -40,6 +40,8 @@ import PrimaryButton from "@/Shared/PrimaryButton.vue";
                                 />
                                 <primary-button :disabled="!canSendRequest" :is-loading="showLoadingModal" type="submit" class="ml-1 mt-1 inline-flex w-2/12 items-center font-medium" variation="primary">Generate</primary-button>
                             </div>
+                            <div v-if="errors.url" class="text-red-800">{{ errors.url }}</div>
+
                         </div>
                     </div>
 
@@ -98,6 +100,7 @@ export default {
     props: {
         prefilledTemplate: Object,
         otherTemplates: Object,
+        errors: Object
     },
     methods: {
         selectTemplate(template){
