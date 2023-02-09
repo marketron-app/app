@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Template\StoreTemplateRequest;
 use App\Http\Requests\Admin\Template\UpdateTemplateImage;
+use App\Http\Requests\Admin\Template\UpdateThumbnailImage;
 use App\Http\Resources\Admin\Templates\LiteTemplateResource;
 use App\Http\Resources\Admin\Templates\TemplateResource;
 use App\Models\Template;
@@ -127,6 +128,13 @@ class TemplateController extends Controller
     public function updateTemplateImage(UpdateTemplateImage $request, Template $template)
     {
         $this->templateService->updateTemplateImage($template, $request);
+
+        return redirect(route('admin.templates.show', ['template' => $template->id]));
+    }
+
+    public function updateThumbnailImage(UpdateThumbnailImage $request, Template $template)
+    {
+        $this->templateService->updateThumbnailImage($template, $request);
 
         return redirect(route('admin.templates.show', ['template' => $template->id]));
     }
