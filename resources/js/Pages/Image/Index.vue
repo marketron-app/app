@@ -41,6 +41,7 @@ import PrimaryButton from "@/Shared/PrimaryButton.vue";
                                 <primary-button :disabled="!canSendRequest" :is-loading="showLoadingModal" type="submit" class="ml-1 mt-1 inline-flex w-2/12 items-center font-medium" variation="primary">Generate</primary-button>
                             </div>
                             <div v-if="errors.url" class="text-red-800">{{ errors.url }}</div>
+                            <div v-if="errors.generate" class="text-red-800">{{ errors.generate }}</div>
 
                         </div>
                     </div>
@@ -114,8 +115,19 @@ export default {
                 }))
                 .post(this.route("images.store"), {
                     onStart: () => {this.showLoadingModal = true},
-                    onFinish: () => {this.showLoadingModal = false}
+                    onFinish: this.handleOnFinish
                 })
+        },
+        handleOnFinish(){
+            this.showLoadingModal = false
+
+            if(this.errors ){
+                Object.values(this.errors).forEach((error) => {
+                    this.$toast.error(error, {
+                        position: "top-right"
+                    });
+                })
+            }
         }
     },
     computed: {
