@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\ImageController;
 use App\Http\Controllers\Admin\TemplateController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Middleware\IsAdminMiddleware;
@@ -21,4 +22,5 @@ Route::group(['middleware' => IsAdminMiddleware::class], function () {
     Route::post('templates/{template}/rerender', [TemplateController::class, 'rerenderThumbnail'])->name('templates.rerender');
 
     Route::get("users", [UserController::class, "index"])->name("users.index");
+    Route::get("images", [ImageController::class, "index"])->name("images.index");
 });
