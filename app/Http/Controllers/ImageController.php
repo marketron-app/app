@@ -35,13 +35,13 @@ class ImageController extends Controller
                 (string) $request->validated('template'),
                 (string) $request->validated('url'),
             );
+
             return redirect(route('images.show', ['image' => $image]));
-        }catch (\Exception $exception){
-            $errors = ["generate" => "There was a problem generating your image. Check your URL and try again."];
+        } catch (\Exception $exception) {
+            $errors = ['generate' => 'There was a problem generating your image. Check your URL and try again.'];
+
             return redirect(route('images.index'))->withErrors($errors);
-
         }
-
     }
 
     public function show(Image $image)

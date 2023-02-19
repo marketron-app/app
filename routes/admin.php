@@ -21,6 +21,6 @@ Route::group(['middleware' => IsAdminMiddleware::class], function () {
     Route::post('templates/{template}/update-thumbnail-image', [TemplateController::class, 'updateThumbnailImage'])->name('templates.update-thumbnail-image');
     Route::post('templates/{template}/rerender', [TemplateController::class, 'rerenderThumbnail'])->name('templates.rerender');
 
-    Route::get("users", [UserController::class, "index"])->name("users.index");
-    Route::get("images", [ImageController::class, "index"])->name("images.index");
+    Route::get('users', [UserController::class, 'index'])->name('users.index');
+    Route::get('images', [ImageController::class, 'index'])->name('images.index');
 });

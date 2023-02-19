@@ -10,8 +10,10 @@ use Inertia\Inertia;
 
 class UserController extends Controller
 {
-    public function index(Request $request){
+    public function index(Request $request)
+    {
         $users = UserResource::collection(User::query()->paginate());
-        return Inertia::render("Admin/User/Index")->with(["users" => $users]);
+
+        return Inertia::render('Admin/User/Index')->with(['users' => $users]);
     }
 }

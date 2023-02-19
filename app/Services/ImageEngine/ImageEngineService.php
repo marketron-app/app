@@ -28,13 +28,14 @@ class ImageEngineService
         $body = $res->json();
 
         $metrics = [
-            "crawler" => $res->header("X-Marketron-Metric-Crawler"),
-            "transformer" => $res->header("X-Marketron-Metric-Transformer"),
-            "uploader" => $res->header("X-Marketron-Metric-Uploader"),
+            'crawler' => $res->header('X-Marketron-Metric-Crawler'),
+            'transformer' => $res->header('X-Marketron-Metric-Transformer'),
+            'uploader' => $res->header('X-Marketron-Metric-Uploader'),
         ];
+
         return [
-            "body" => $body,
-            "metrics" => $metrics
+            'body' => $body,
+            'metrics' => $metrics,
         ];
     }
 }

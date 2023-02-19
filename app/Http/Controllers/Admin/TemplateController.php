@@ -38,8 +38,6 @@ class TemplateController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     *
-     * @return Response
      */
     public function create(): Response
     {
@@ -48,9 +46,6 @@ class TemplateController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  StoreTemplateRequest  $request
-     * @return Application|RedirectResponse|Redirector
      */
     public function store(StoreTemplateRequest $request): Redirector|RedirectResponse|Application
     {
@@ -61,9 +56,6 @@ class TemplateController extends Controller
 
     /**
      * Display the specified resource.
-     *
-     * @param  Template  $template
-     * @return Response
      */
     public function show(Template $template): Response
     {
@@ -86,8 +78,6 @@ class TemplateController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  UpdateTemplateImage  $request
-     * @param  Template  $template
      * @return Application|Redirector|RedirectResponse
      */
     public function update(UpdateTemplateImage $request, Template $template)

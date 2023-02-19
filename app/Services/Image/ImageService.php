@@ -30,7 +30,7 @@ class ImageService
             's3_path' => $response['body']['filename'],
             'user_id' => Auth::user()?->getAuthIdentifier(),
             'metadata' => [
-                'metrics' => $response['metrics']
+                'metrics' => $response['metrics'],
             ],
         ]);
     }

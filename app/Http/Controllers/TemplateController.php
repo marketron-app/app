@@ -15,8 +15,6 @@ class TemplateController extends Controller
 
     /**
      * Display a listing of the resource.
-     *
-     * @return AnonymousResourceCollection
      */
     public function index(IndexTemplatesRequest $request): AnonymousResourceCollection
     {

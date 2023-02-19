@@ -64,6 +64,7 @@ class TemplateService
 
         return $template;
     }
+
     public function updateThumbnailImage(Template $template, UpdateThumbnailImage $request): Template
     {
         if ($request->hasFile('thumbnailImage')) {

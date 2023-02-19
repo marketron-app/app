@@ -16,10 +16,10 @@ class ImageResource extends JsonResource
     public function toArray($request)
     {
         return [
-            "id" => $this->id,
-            "url" => $this->url,
-            "user" => UserResource::make($this->user) ?? null,
-            "createdAt" => $this->created_at
+            'id' => $this->id,
+            'url' => $this->url,
+            'user' => UserResource::make($this->user) ?? null,
+            'createdAt' => $this->created_at,
         ];
     }
 }

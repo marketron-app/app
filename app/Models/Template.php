@@ -46,7 +46,7 @@ class Template extends Model
     public static function boot()
     {
         parent::boot();
-        static::deleting(function($template){
+        static::deleting(function ($template) {
             $template->processingEvents()->delete();
         });
     }
