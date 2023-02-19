@@ -27,9 +27,11 @@ class ImageService
         return Image::query()->create([
             'url' => $url,
             'template_id' => $template->id,
-            's3_path' => $response['filename'],
+            's3_path' => $response['body']['filename'],
             'user_id' => Auth::user()?->getAuthIdentifier(),
-            'metadata' => [],
+            'metadata' => [
+                'metrics' => $response['metrics']
+            ],
         ]);
     }
 

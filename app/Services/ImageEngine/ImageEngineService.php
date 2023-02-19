@@ -24,6 +24,17 @@ class ImageEngineService
             'viewportHeight' => $request->getTemplate()->getViewportHeight(),
         ]);
 
-        return $this->client->get('/image', $query)->json();
+        $res = $this->client->get('/image', $query);
+        $body = $res->json();
+
+        $metrics = [
+            "crawler" => $res->header("X-Marketron-Metric-Crawler"),
+            "transformer" => $res->header("X-Marketron-Metric-Transformer"),
+            "uploader" => $res->header("X-Marketron-Metric-Uploader"),
+        ];
+        return [
+            "body" => $body,
+            "metrics" => $metrics
+        ];
     }
 }
