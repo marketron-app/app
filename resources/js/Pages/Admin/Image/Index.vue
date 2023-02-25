@@ -39,6 +39,9 @@ import Modal from "@/Components/Modal.vue";
                                 URL
                             </th>
                             <th scope="col" class="py-3 px-6">
+                                Template
+                            </th>
+                            <th scope="col" class="py-3 px-6">
                                 User
                             </th>
                             <th scope="col" class="py-3 px-6">
@@ -52,8 +55,11 @@ import Modal from "@/Components/Modal.vue";
                             <th scope="row" class="py-4 px-6">
                                 {{ image.id }}
                             </th>
-                            <td class="py-4 px-6 font-medium whitespace-nowrap">
-                                {{ image.url }}
+                            <td class="py-4 px-6 font-medium whitespace-normal">
+                                <a :href="image.url" target="_blank">{{ image.url }}</a>
+                            </td>
+                            <td class="py-4 px-6 font-medium whitespace-normal">
+                                {{image.template?.identifier}}
                             </td>
                             <td class="py-4 px-6 font-medium whitespace-nowrap">
                                 <span v-if="image.user">
@@ -64,7 +70,12 @@ import Modal from "@/Components/Modal.vue";
                                 {{ format(new Date(image.createdAt), 'MM/dd/yyyy (HH:mm)') }}
                             </td>
                             <td class="py-4 px-6 font-medium whitespace-nowrap">
-                                <primary-button variation="info" :disabled="!image.metrics" @click="showMetrics(image)">
+                                <a :href="route('images.show', image.id)" target="_blank">
+                                    <primary-button variation="primary">
+                                        Show
+                                    </primary-button>
+                                </a>
+                                <primary-button variation="info" :disabled="!image.metrics" @click="showMetrics(image)" class="ml-1">
                                     Metrics
                                 </primary-button>
                             </td>

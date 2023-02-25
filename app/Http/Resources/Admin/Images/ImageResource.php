@@ -3,6 +3,7 @@
 namespace App\Http\Resources\Admin\Images;
 
 use App\Http\Resources\Admin\Users\UserResource;
+use App\Http\Resources\Templates\TemplateResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ImageResource extends JsonResource
@@ -20,7 +21,8 @@ class ImageResource extends JsonResource
             'url' => $this->url,
             'user' => UserResource::make($this->user) ?? null,
             'createdAt' => $this->created_at,
-            'metrics' => $this->metrics()
+            'metrics' => $this->metrics(),
+            'template' => TemplateResource::make($this->template)
         ];
     }
 
