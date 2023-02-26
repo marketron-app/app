@@ -22,9 +22,9 @@ class PaginationSearchRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "perPage" => ["integer", "nullable"],
-            "page" => ["integer", "nullable"],
-            "search" => ["nullable"]
+            'perPage' => ['integer', 'nullable'],
+            'page' => ['integer', 'nullable'],
+            'search' => ['nullable'],
         ];
     }
 }

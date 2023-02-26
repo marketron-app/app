@@ -22,8 +22,7 @@ class ImageResource extends JsonResource
             'user' => UserResource::make($this->user) ?? null,
             'createdAt' => $this->created_at,
             'metrics' => $this->metrics(),
-            'template' => TemplateResource::make($this->template)
+            'template' => TemplateResource::make($this->template),
         ];
     }
-
 }
