@@ -28,9 +28,10 @@ class ImageController extends Controller
         ]);
     }
 
-    public function indexMore(Request $request){
-        $excludedTemplates = $request->get("excluded", []);
-        $templates = Template::query()->whereNotIn("identifier", $excludedTemplates)->paginate();
+    public function indexMore(Request $request)
+    {
+        $excludedTemplates = $request->get('excluded', []);
+        $templates = Template::query()->whereNotIn('identifier', $excludedTemplates)->paginate();
 
         return TemplateResource::collection($templates);
     }

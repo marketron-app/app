@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\ImageController;
-use App\Http\Controllers\TemplateController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,5 +20,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::prefix('templates')->group(function () {
-    Route::get('', [ImageController::class, 'indexMore'])->name("templates.more");
+    Route::get('', [ImageController::class, 'indexMore'])->name('templates.more');
 });
