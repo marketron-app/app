@@ -66,7 +66,14 @@ import PrimaryButton from "@/Shared/PrimaryButton.vue";
 
 
                 </div>
+
             </form>
+
+            <div class="flex justify-center w-full">
+                <primary-button variation="primary" @click="loadMore" v-if="otherTemplates.meta.last_page > otherTemplates.meta.current_page">Load more</primary-button>
+
+            </div>
+
         </main>
 
     </div>
@@ -128,6 +135,18 @@ export default {
                     });
                 })
             }
+        },
+        async loadMore(){
+
+            const response = await window.axios.get(this.route("templates.more"), {
+                params: {
+                    excluded: [...this.otherTemplates.data.map(el => el.identifier), ...this.prefilledTemplate.data.identifier]
+                }
+            })
+
+            this.otherTemplates.meta = response.data.meta
+            this.otherTemplates.data.push(...response.data.data)
+
         }
     },
     computed: {

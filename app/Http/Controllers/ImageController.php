@@ -20,12 +20,19 @@ class ImageController extends Controller
     public function index(Request $request)
     {
         $selectedTemplate = Template::query()->where('identifier', $request->query('identifier'))->first();
-        $otherTemplates = Template::query()->published()->whereNot('id', $selectedTemplate?->id)->inRandomOrder()->take(10)->get();
+        $otherTemplates = Template::query()->published()->whereNot('id', $selectedTemplate?->id)->inRandomOrder()->take(10)->paginate();
 
         return Inertia::render('Image/Index', [
             'prefilledTemplate' => $selectedTemplate ? TemplateResource::make($selectedTemplate) : null,
             'otherTemplates' => TemplateResource::collection($otherTemplates),
         ]);
+    }
+
+    public function indexMore(Request $request){
+        $excludedTemplates = $request->get("excluded", []);
+        $templates = Template::query()->whereNotIn("identifier", $excludedTemplates)->paginate();
+
+        return TemplateResource::collection($templates);
     }
 
     public function store(StoreImageRequest $request): \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
