@@ -70,7 +70,7 @@ import PrimaryButton from "@/Shared/PrimaryButton.vue";
             </form>
 
             <div class="flex justify-center w-full">
-                <primary-button variation="primary" @click="loadMore" v-if="otherTemplates.meta.last_page > otherTemplates.meta.current_page">Load more</primary-button>
+                <primary-button variation="primary" @click="loadMore" :is-loading="isLoadingMore" v-if="otherTemplates.meta.last_page > otherTemplates.meta.current_page">Load more</primary-button>
 
             </div>
 
@@ -102,7 +102,8 @@ export default {
               url: ""
           }),
           selectedTemplate: null,
-          showLoadingModal: false
+          showLoadingModal: false,
+          isLoadingMore: false
       }
     },
     props: {
@@ -137,15 +138,22 @@ export default {
             }
         },
         async loadMore(){
+            this.isLoadingMore = true
+            try {
+                const response = await window.axios.get(this.route("templates.more"), {
+                    params: {
+                        excluded: [...this.otherTemplates.data.map(el => el.identifier), ...(this.prefilledTemplate != null ? this.prefilledTemplate.data.identifier : [])]
+                    }
+                })
 
-            const response = await window.axios.get(this.route("templates.more"), {
-                params: {
-                    excluded: [...this.otherTemplates.data.map(el => el.identifier), ...this.prefilledTemplate.data.identifier]
-                }
-            })
+                this.otherTemplates.meta = response.data.meta
+                this.otherTemplates.data.push(...response.data.data)
 
-            this.otherTemplates.meta = response.data.meta
-            this.otherTemplates.data.push(...response.data.data)
+            }catch (e) {
+
+            }finally {
+                this.isLoadingMore = false
+            }
 
         }
     },
