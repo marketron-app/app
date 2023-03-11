@@ -35,6 +35,17 @@ class ImageController extends Controller
 
         return TemplateResource::collection($templates);
     }
+    public function indexSearch(Request $request)
+    {
+        $search = $request->get("search");
+        $templates = Template::query()
+            ->where('identifier', "LIKE", "%".$search."%")
+            ->orWhere('title', "LIKE", "%".$search."%")
+            ->orWhere('description', "LIKE", "%".$search."%")
+            ->paginate();
+
+        return TemplateResource::collection($templates);
+    }
 
     public function store(StoreImageRequest $request): \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
     {

@@ -46,7 +46,17 @@ import PrimaryButton from "@/Shared/PrimaryButton.vue";
                         </div>
                     </div>
 
-                    <h2 class="mt-3 mb-0 text-xl">Select template</h2>
+                    <div class="flex justify-between mt-3 mb-2">
+                        <h2 class="mt-3 mb-0 text-xl">Select template</h2>
+                        <TextInput
+                            id="search"
+                            type="text"
+                            class="mt-1 block"
+                            v-model="search"
+                            @keyup="searchDebounce"
+                            placeholder="Search (android, iphone, ...)"
+                        />
+                    </div>
                     <div class="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
                         <div v-if="prefilledTemplate" class="group relative" @click="selectTemplate(prefilledTemplate.data)" :class="{selected: prefilledTemplate.data.id === selectedTemplate?.id}">
                             <div
@@ -103,7 +113,9 @@ export default {
           }),
           selectedTemplate: null,
           showLoadingModal: false,
-          isLoadingMore: false
+          isLoadingMore: false,
+          search: "",
+          timer: null
       }
     },
     props: {
@@ -155,6 +167,28 @@ export default {
                 this.isLoadingMore = false
             }
 
+        },
+        searchDebounce(){
+            clearTimeout(this.timer);
+
+            this.timer = setTimeout(async () => {
+                this.isLoadingMore = true
+                try {
+                    const response = await window.axios.get(this.route("templates.search"), {
+                        params: {
+                            search: this.search
+                        }
+                    })
+
+                    this.otherTemplates.meta = response.data.meta
+                    this.otherTemplates.data = response.data.data
+
+                }catch (e) {
+
+                }finally {
+                    this.isLoadingMore = false
+                }
+            }, 300);
         }
     },
     computed: {

@@ -12,6 +12,7 @@ import Toaster from "@meforma/vue-toaster";
 import "../css/tooltip.css"
 import { useAccordion } from "vue3-rich-accordion";
 import "vue3-rich-accordion/accordion-library-styles.css";
+import vueDebounce from 'vue-debounce'
 
 const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel';
 
@@ -25,6 +26,7 @@ createInertiaApp({
             .use(VueSimpleAlert)
             .use(Toaster)
             .use(useAccordion)
+            .use(vueDebounce)
             .mount(el);
     },
 });
