@@ -21,4 +21,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::prefix('templates')->group(function () {
     Route::get('', [ImageController::class, 'indexMore'])->name('templates.more');
+    Route::get('', [ImageController::class, 'indexSearch'])->name('templates.search');
 });
