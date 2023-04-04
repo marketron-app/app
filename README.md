@@ -33,7 +33,7 @@
   <a href="https://github.com/marketron-app/app">
     <img src="public/images/marketron-cropped.png" alt="Logo" height="50">
   </a>
-<h3 align="center">Marketronxw</h3>
+<h3 align="center">Marketron</h3>
 
   <p align="center">
    This is application is a main entry point for Marketron application. It handles user management, template management
